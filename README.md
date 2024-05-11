@@ -6,7 +6,7 @@
 ## Installation:
  Clone the repository
   
-# Configuration
+## Configuration
 
 Settings in include/conf.php file.
 
@@ -31,7 +31,7 @@ try_files $uri $uri/ @rewrite;
 
 
 ## Demo:
-http://myhotel.nunofcguerreiro.com
+https://myhotel.nunofcguerreiro.com
 
 
 
