@@ -35,11 +35,3 @@ try_files $uri $uri/ @rewrite;
 ``` 
 
 
-
-## ScreenShots:
-
-
-
-
-
-
