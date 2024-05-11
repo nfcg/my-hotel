@@ -1,7 +1,5 @@
 # My Hotel
- Hotel Website and Reservation Manager
-
-
+ Hotel Website, Booking and Reservation System
 
 ## Demo:
  https://myhotel.nunofcguerreiro.com
