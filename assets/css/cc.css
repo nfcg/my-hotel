@@ -1,0 +1,54 @@
+@page {
+  size: A4;
+  margin: auto;
+}
+
+@media screen {
+
+  #printSection {
+    display: none;
+  }
+
+}
+
+@media print {
+
+  body * {
+    visibility: hidden;
+  }
+
+  html.container - fluid {
+    display: none;
+  }
+
+  #printSection, #printSection * {
+    visibility: visible;
+  }
+
+  #printSection {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  #printThis {
+
+    label {
+      color: black;
+    }
+
+    input {
+      border - bottom - right - radius: 0!important;
+      border - bottom - left - radius: 0!important;
+      color: blue;
+      margin - left: 5 px;
+    }
+
+    h4 {
+      color: blue!important;
+      margin - left: 30 px;
+    }
+
+  }
+
+}

@@ -1,0 +1,72 @@
+.tblColEllipsis {
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pagination-info {
+  content: "";
+  display: none;
+  clear: both;
+}
+.editable-clear-x {
+  content: "";
+  display: none;
+  clear: both;
+  background: none;
+}
+
+@page {
+  size: A4;
+  margin: auto;
+}
+
+@media screen {
+  #printSection {
+    display: none;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  html .container-fluid {
+    display: none;
+  }
+
+  #printSection,
+  #printSection * {
+    visibility: visible;
+  }
+
+  #printSection {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  #printThis {
+    label {
+      color: gray;
+    }
+
+    div {
+      border-bottom-right-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      color: blue;
+    }
+
+    .card-title {
+      font-weight: bold;
+    }
+
+    h5 {
+      color: blue !important;
+      margin-left: 30px;
+    }
+  }
+}
+
