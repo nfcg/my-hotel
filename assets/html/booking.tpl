@@ -93,7 +93,7 @@
         </div>
         <div class="input-group date input-group-lg mb-3 shadow shadow-sm">
           <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$NUMBER}</span>
-          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0 d-flex justify-content-center mx-auto" id="cc_number" name="cc_number" autocomplete="off" value="5500005555555559" required>
+          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0 d-flex justify-content-center mx-auto" id="cc_number" name="cc_number" autocomplete="off" required>
         </div>
         <div class="row">
           <div class="col input-group date input-group-lg mb-3">

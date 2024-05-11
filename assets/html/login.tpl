@@ -12,12 +12,12 @@
             <h3 class="bi bi-box-arrow-right fw-bold my-4 text-primary"> {$LOGIN} </h3>
             
             <div class="form-floating mb-3">
-              <input value="admin" type="text" class="form-control border rounded-0 rounded-bottom border-primary border-top-0 border-end-0 border-bottom-1" id="user_email" name="user_email" placeholder="{$NAME}" required>
+              <input type="text" class="form-control border rounded-0 rounded-bottom border-primary border-top-0 border-end-0 border-bottom-1" id="user_email" name="user_email" placeholder="{$NAME}" required>
               <label class="form-label" for="user_email"> {$NAME} </label>
             </div>
             
             <div class="form-floating mb-3">
-              <input value="admin" type="password" class="form-control border rounded-0 rounded-bottom border-primary border-top-0 border-end-0 border-bottom-1" id="password" name="password" placeholder="{$PASSWORD}" required>
+              <input type="password" class="form-control border rounded-0 rounded-bottom border-primary border-top-0 border-end-0 border-bottom-1" id="password" name="password" placeholder="{$PASSWORD}" required>
               <label class="form-label" for="password"> {$PASSWORD} </label>
             </div>
             
