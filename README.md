@@ -2,16 +2,19 @@
  Hotel Website and Reservation Manager
 
 
+
 ## Demo:
-https://myhotel.nunofcguerreiro.com
+ https://myhotel.nunofcguerreiro.com
+
 
 
 ## Installation:
  Clone the repository
  
+ 
   
 ## Configuration
-Settings in include/conf.php file.
+ Settings in include/conf.php file.
 
  - Nginx Example.
 ```
@@ -30,6 +33,7 @@ try_files $uri $uri/ @rewrite;
 }
 
 ``` 
+
 
 
 ## ScreenShots:
