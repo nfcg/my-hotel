@@ -1,2 +1,4 @@
-# my-hotel
+# MyHotel
  Hotel Website and Reservation Manager
+
+ 
