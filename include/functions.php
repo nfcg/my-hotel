@@ -1,29 +1,38 @@
 <?php
 session_start();
-require 'conf.php';
-require 'autoload.php';
+require "conf.php";
+require "autoload.php";
 
 use Smarty\Smarty;
 
 $smarty = new Smarty();
 
-$smarty->setTemplateDir('./assets/html');
-$smarty->setCompileDir('./assets/html/templates_c');
-$smarty->setCacheDir('./assets/html/cache');
-$smarty->setConfigDir('./assets/html/config');
+$smarty->setTemplateDir("./assets/html");
+$smarty->setCompileDir("./assets/html/templates_c");
+$smarty->setCacheDir("./assets/html/cache");
+$smarty->setConfigDir("./assets/html/config");
 //$smarty->testInstall();
 //$smarty->caching = 0;
 
-if ($http == 'https') {$secure = true;} else {$secure = false;}
-if (!empty($_POST["remember"])) { $expirytime = time() + 3600 * 24 * 365; } else { $expirytime = time() + 3600 * 24 * 1; }
+if ($http == "https") {
+    $secure = true;
+} else {
+    $secure = false;
+}
+
+if (!empty($_POST["remember"])) {
+    $expirytime = time() + 3600 * 24 * 365;
+} else {
+    $expirytime = time() + 3600 * 24 * 1;
+}
 
 $cookie_params = [
-    'expires' => $expirytime,
-    'path' => '/',
-    'domain' => $domain,
-    'secure' => false,
-    'httponly' => false,
-    'samesite' => 'None'
+    "expires" => $expirytime,
+    "path" => "/",
+    "domain" => $domain,
+    "secure" => false,
+    "httponly" => false,
+    "samesite" => "None"
 ];
 
 if (isset($_COOKIE["LANGUAGE"])) {
@@ -52,8 +61,10 @@ function sqlite($method, $cmd)
                     $db = null;
                     unset($db);
                 } catch (PDOException $e) {
-                    echo "Connection Error -->> " . $e->getMessage() .
-                        "</br>Error Code -->> " . $e->getCode();
+                    echo "Connection Error -->> " .
+                        $e->getMessage() .
+                        "</br>Error Code -->> " .
+                        $e->getCode();
                     $db = null;
                     unset($db);
                     die();
@@ -67,8 +78,10 @@ function sqlite($method, $cmd)
                     $db = null;
                     unset($db);
                 } catch (PDOException $e) {
-                    echo "Connection Error -->> " . $e->getMessage() .
-                        "</br>Error Code -->> " . $e->getCode();
+                    echo "Connection Error -->> " .
+                        $e->getMessage() .
+                        "</br>Error Code -->> " .
+                        $e->getCode();
                     $db = null;
                     unset($db);
                     die();
@@ -82,8 +95,10 @@ function sqlite($method, $cmd)
                     $db = null;
                     unset($db);
                 } catch (PDOException $e) {
-                    echo "Connection Error -->> " . $e->getMessage() .
-                        "</br>Error Code -->> " . $e->getCode();
+                    echo "Connection Error -->> " .
+                        $e->getMessage() .
+                        "</br>Error Code -->> " .
+                        $e->getCode();
                     $db = null;
                     unset($db);
                     die();
@@ -97,7 +112,7 @@ function sqlite($method, $cmd)
                     $db = null;
                     unset($db);
                 } catch (PDOException $e) {
-                return 0;
+                    return 0;
                     $db = null;
                     unset($db);
                     die();
@@ -111,8 +126,10 @@ function sqlite($method, $cmd)
                     $db = null;
                     unset($db);
                 } catch (PDOException $e) {
-                    echo "Connection Error -->> " . $e->getMessage() .
-                        "</br>Error Code -->> " . $e->getCode();
+                    echo "Connection Error -->> " .
+                        $e->getMessage() .
+                        "</br>Error Code -->> " .
+                        $e->getCode();
                     $db = null;
                     unset($db);
                     die();
@@ -123,8 +140,10 @@ function sqlite($method, $cmd)
                 exit();
         }
     } catch (PDOException $e) {
-        echo "Connection Error -->> " . $e->getMessage() .
-            "</br>Error Code -->> " . $e->getCode();
+        echo "Connection Error -->> " .
+            $e->getMessage() .
+            "</br>Error Code -->> " .
+            $e->getCode();
         $db = null;
         unset($db);
         die();
@@ -133,101 +152,137 @@ function sqlite($method, $cmd)
 
 $database = "$database_location";
 
-$language = sqlite("QUERY_KEY_PAIR", "SELECT NAME, TRANSLATION FROM 'LANGUAGE_$default_language';");
+$language = sqlite("QUERY_KEY_PAIR",
+    "SELECT NAME, TRANSLATION FROM 'LANGUAGE_$default_language';");
 $smarty->assign($language);
 
 foreach ($language as $x => $y) {
-$$x = $smarty->getTemplateVars("$x");
+    $$x = $smarty->getTemplateVars("$x");
 }
 
-$smarty->assign('languages', $languages);
+$smarty->assign("languages", $languages);
 
-$cc_val = [ "01" => $JAN, "02" => $FEB, "03" => $MAR, "04" => $APR, "05" => $MAY, "06" => $JUN, "07" => $JUL, "08" => $AUG, "09" => $SET, "10" => $OUT, "11" => $NOV, "12" => $DEC ];
+$cc_val = [
+    "01" => $JAN,
+    "02" => $FEB,
+    "03" => $MAR,
+    "04" => $APR,
+    "05" => $MAY,
+    "06" => $JUN,
+    "07" => $JUL,
+    "08" => $AUG,
+    "09" => $SET,
+    "10" => $OUT,
+    "11" => $NOV,
+    "12" => $DEC
+];
 
-$cc_years = range(date("Y"), date("Y")+10);
+$cc_years = range(date("Y"), date("Y") + 10);
 
 $smarty->assign("CUR_YEAR", date("Y"));
 $smarty->assign("CC_YEARS", $cc_years);
 $smarty->assign("CC_VAL", $cc_val);
 $smarty->assign("SITE_START_YEAR", $site_start_year);
 
-$gallery_list = sqlite("QUERY_FETCH_ASSOC", 
-            "SELECT TYPE, GAL_NAME FROM IMAGES WHERE LANGUAGE = '$default_language' AND TYPE != 'gallery_carousel' GROUP BY TYPE;"); 
-$smarty->assign('gallery_list', $gallery_list);
+$gallery_list = sqlite("QUERY_FETCH_ASSOC",
+    "SELECT TYPE, GAL_NAME FROM IMAGES WHERE LANGUAGE = '$default_language' AND TYPE != 'gallery_carousel' GROUP BY TYPE;");
+$smarty->assign("gallery_list", $gallery_list);
+
 $gallerys = sqlite("QUERY_FETCH_ASSOC", 
-            "SELECT * FROM IMAGES;"); 
-$smarty->assign('images', $gallerys);
+    "SELECT * FROM IMAGES;");
+$smarty->assign("images", $gallerys);
 
-$services = sqlite("QUERY_FETCH_ASSOC", 
-            "SELECT * FROM SERVICES WHERE LANGUAGE = '$default_language';");
-$smarty->assign('services', $services); 
+$services = sqlite("QUERY_FETCH_ASSOC",
+    "SELECT * FROM SERVICES WHERE LANGUAGE = '$default_language';");
+$smarty->assign("services", $services);
+
 $services_admin = sqlite("QUERY_FETCH_ASSOC", 
-            "SELECT * FROM SERVICES;");
-$smarty->assign('services_admin', $services_admin);
+    "SELECT * FROM SERVICES;");
+$smarty->assign("services_admin", $services_admin);
 
-$rooms = sqlite("QUERY_FETCH_ASSOC", 
-            "SELECT * FROM ROOMS WHERE LANGUAGE = '$default_language';");
-$smarty->assign('rooms', $rooms); 
+$rooms = sqlite("QUERY_FETCH_ASSOC",
+    "SELECT * FROM ROOMS WHERE LANGUAGE = '$default_language';");
+$smarty->assign("rooms", $rooms);
+
 $rooms_admin = sqlite("QUERY_FETCH_ASSOC", 
-            "SELECT * FROM ROOMS;"); 
-$smarty->assign('rooms_admin', $rooms_admin);
+    "SELECT * FROM ROOMS;");
+$smarty->assign("rooms_admin", $rooms_admin);
 
-$room_types = sqlite("QUERY_FETCH_ASSOC", 
-            "SELECT TYPE FROM ROOMS GROUP BY TYPE;"); 
-$smarty->assign('room_types', $room_types);
+$room_types = sqlite("QUERY_FETCH_ASSOC",
+    "SELECT TYPE FROM ROOMS GROUP BY TYPE;");
+$smarty->assign("room_types", $room_types);
 
 $images = sqlite("QUERY_FETCH_ASSOC", 
-            "SELECT * FROM IMAGES;"); 
-$smarty->assign('images', $images);
-            
-$carousel = sqlite("QUERY_FETCH_ASSOC", 
-            "SELECT * FROM IMAGES WHERE LANGUAGE = '$default_language' AND TYPE = 'gallery_carousel';");
-$smarty->assign('carousel', $carousel);
-      
+    "SELECT * FROM IMAGES;");
+$smarty->assign("images", $images);
+
+$carousel = sqlite("QUERY_FETCH_ASSOC",
+    "SELECT * FROM IMAGES WHERE LANGUAGE = '$default_language' AND TYPE = 'gallery_carousel';");
+$smarty->assign("carousel", $carousel);
+
 $today = date("Y-m-d");
 //$today = '2024-05-01';
 
-$check_in_today  = sqlite("QUERY_FETCH_ASSOC", 
-            "SELECT substr(DATE,1,4) AS DATE, ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, CHECK_IN, CHECK_OUT FROM BOOKINGS WHERE CHECK_IN = '$today' AND STATUS = 'confirmed';");
-$smarty->assign('check_in_today', $check_in_today);
+$check_in_today = sqlite("QUERY_FETCH_ASSOC",
+    "SELECT substr(DATE,1,4) AS DATE, ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, CHECK_IN, CHECK_OUT FROM BOOKINGS WHERE CHECK_IN = '$today' AND STATUS = 'confirmed';");
+$smarty->assign("check_in_today", $check_in_today);
 
-$check_out_today  = sqlite("QUERY_FETCH_ASSOC", 
-            "SELECT substr(DATE,1,4) AS DATE, ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, CHECK_IN, CHECK_OUT FROM BOOKINGS WHERE CHECK_OUT = '$today' AND STATUS = 'confirmed';");
-$smarty->assign('check_out_today', $check_out_today);
+$check_out_today = sqlite("QUERY_FETCH_ASSOC",
+    "SELECT substr(DATE,1,4) AS DATE, ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, CHECK_IN, CHECK_OUT FROM BOOKINGS WHERE CHECK_OUT = '$today' AND STATUS = 'confirmed';");
+$smarty->assign("check_out_today", $check_out_today);
 
-$recent_bookings  = sqlite("QUERY_FETCH_ASSOC", 
-            "SELECT substr(DATE,1,4) AS DATE, ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, CHECK_IN, CHECK_OUT FROM BOOKINGS WHERE STATUS = 'confirmed' ORDER BY ID DESC LIMIT 5;");
-$smarty->assign('recent_bookings', $recent_bookings);
+$recent_bookings = sqlite("QUERY_FETCH_ASSOC",
+    "SELECT substr(DATE,1,4) AS DATE, ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, CHECK_IN, CHECK_OUT FROM BOOKINGS WHERE STATUS = 'confirmed' ORDER BY ID DESC LIMIT 5;");
+$smarty->assign("recent_bookings", $recent_bookings);
 
-            
-$templates = ['booking', 'contact', 'footer', 'gallery', 'head', 'header', 'index', 'login', 'navbar', 'rooms', 'services'];
+$templates = [
+    "booking",
+    "contact",
+    "footer",
+    "gallery",
+    "head",
+    "header",
+    "index",
+    "login",
+    "navbar",
+    "rooms",
+    "services"
+];
 
 $templates_languages = [];
 
-foreach($languages as $value) {
- $templates_languages[] = $value.'_privacy';
- $templates_languages[] = $value.'_terms';
+foreach ($languages as $value) {
+    $templates_languages[] = $value . "_privacy";
+    $templates_languages[] = $value . "_terms";
 }
 
 $templates = array_merge($templates, $templates_languages);
 
-$smarty->assign('templates', $templates);
+$smarty->assign("templates", $templates);
 
-$html_lang = $default_language;    
-if($html_lang == 'pt_PT' ) { $html_lang = 'pt-PT'; }
+$html_lang = $default_language;
+if ($html_lang == "pt_PT") {
+    $html_lang = "pt-PT";
+}
 $smarty->clearAssign("html_lang");
-$smarty->assign('html_lang', $html_lang);
+$smarty->assign("html_lang", $html_lang);
 
-$smarty->assign('domain', $domain);
-$smarty->assign('http', $http);
-$smarty->assign('seo_links', $seo_links);
+$smarty->assign("domain", $domain);
+$smarty->assign("http", $http);
+$smarty->assign("seo_links", $seo_links);
 
-function session_started(){ if (isset($_SESSION["SITE"]) && $_SESSION["SITE"] != "") { return true; } else { return false; } }
+function session_started()
+{
+    if (isset($_SESSION["SITE"]) && $_SESSION["SITE"] != "") {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 function my_encode($token)
 {
-
-/* 
+    /* 
     $uuid = sprintf(
         "%04x%04x-%04x-%04x-%04x-%04x%04x%04x",
         mt_rand(0, 0xffff),
@@ -239,18 +294,18 @@ function my_encode($token)
         mt_rand(0, 0xffd3),
         mt_rand(0, 0xff4b)
     );
-*/    
+    */
 
-        $data = random_bytes(16);
-        assert(strlen($data) == 16);
-        $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
-        $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
-        
-        $uuid = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
-    
-        $cipher_method = "AES-256-CTR";
-        $enc_key = openssl_digest($uuid, "SHA256", true);
-        
+    $data = random_bytes(16);
+    assert(strlen($data) == 16);
+    $data[6] = chr((ord($data[6]) & 0x0f) | 0x40);
+    $data[8] = chr((ord($data[8]) & 0x3f) | 0x80);
+
+    $uuid = vsprintf("%s%s-%s-%s-%s-%s%s%s", str_split(bin2hex($data), 4));
+
+    $cipher_method = "AES-256-CTR";
+    $enc_key = openssl_digest($uuid, "SHA256", true);
+
     if ((array) $token !== $token) {
         $iv = openssl_random_pseudo_bytes(
             openssl_cipher_iv_length($cipher_method)
@@ -285,7 +340,7 @@ function my_encode($token)
 
 function my_decode($iv, $crypted = null, $uuid = null)
 {
-        $cipher_method = "AES-256-CTR";
+    $cipher_method = "AES-256-CTR";
 
     if ((array) $iv !== $iv) {
         list($crypted, $iv) = explode("::", $crypted);
@@ -404,7 +459,7 @@ class CreditCard
             "length" => [16],
             "cvcLength" => [3],
             "luhn" => true,
-        ],
+        ]
     ];
 
     public static function validCreditCard($number, $type = null)
@@ -531,7 +586,7 @@ function getUserIP()
     }
     return $ipaddress;
 }
- 
+
 $lgd_page = [
     "admin_calendar",
     "admin_bookings",
@@ -546,30 +601,30 @@ $lgd_page = [
 ];
 
 $do_admin = [
-'json_calendar', 
-'calendar_update', 
-'json_bookings',
-'calendar_bookings',
-'admin_rooms',
-'save_admin_rooms',
-'admin_services', 
-'save_admin_services',
-'admin_gallery',
-'save_admin_gallery',
-'upload_image',
-'admin_gallery_add_gallery', 
-'admin_gallery_delete_image',
-'admin_gallery_add_image',
-'admin_room_add_room',
-'admin_room_delete_room',
-'admin_service_add_service', 
-'admin_service_delete_service',
-'admin_save_template',
-'my_dencrypt',
-'add_year',
-'json_language',
-'save_language', 
-'change_password'
+    "json_calendar",
+    "calendar_update",
+    "json_bookings",
+    "calendar_bookings",
+    "admin_rooms",
+    "save_admin_rooms",
+    "admin_services",
+    "save_admin_services",
+    "admin_gallery",
+    "save_admin_gallery",
+    "upload_image",
+    "admin_gallery_add_gallery",
+    "admin_gallery_delete_image",
+    "admin_gallery_add_image",
+    "admin_room_add_room",
+    "admin_room_delete_room",
+    "admin_service_add_service",
+    "admin_service_delete_service",
+    "admin_save_template",
+    "my_dencrypt",
+    "add_year",
+    "json_language",
+    "save_language",
+    "change_password"
 ];
 
 ?>
