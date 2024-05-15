@@ -7,20 +7,17 @@
     
       <h3 class="text-primary fw-bold mb-2 shadow bg-body rounded py-1">{$value_list.GAL_NAME}</h3>
       <div class="card-group mb-5 d-flex flex-wrap shadow p-1 bg-body rounded">
-       {foreach $images as $value}
-        {if $value_list.GAL_NAME eq $value.GAL_NAME} 
-         <div class="card text-dark bg-light">
-          <a href="{$value.IMG_SRC}" data-toggle="lightbox" data-gallery="{$value_list.GAL_NAME}" alt="{$value.IMG_ALT}">     
-           <img class="img-fluid" src="{$value.IMG_SRC}">
+       {foreach $images as $value}{if $value_list.GAL_NAME eq $value.GAL_NAME}<div class="card text-dark bg-light">
+          <a href="{$value.IMG_SRC}" data-toggle="lightbox" data-gallery="{$value_list.GAL_NAME}">     
+           <img class="card-img-top mx-auto img-fluid" src="{$value.IMG_SRC}" alt="{$value.IMG_ALT}">
           </a>      
           <div class="card-body">
             <p class="card-text">{$value.DESCRIPTION}</p>
           </div>
-        </div> 
-        {/if} 
-       {/foreach} </div>
-    </div> 
-   {/foreach}
+       </div> 
+       {/if}{/foreach}</div>
+      </div>
+    {/foreach}
     
   </div>
 </div>

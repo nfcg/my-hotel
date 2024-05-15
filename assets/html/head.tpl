@@ -97,6 +97,12 @@
         text-align: center;
       }
       </style>{/if}
+      
+    {if {$page} == 'gallery'}<style>
+      .card:hover {
+        opacity: 0.7;
+      }
+      </style>{/if}
 
     {if {$page} == 'booking' || {$page} == 'login' || {$page} == 'admin_change_password'}<script>{literal} 
           (function () {
