@@ -10,7 +10,9 @@
        {foreach $images as $value}
         {if $value_list.GAL_NAME eq $value.GAL_NAME} 
          <div class="card text-dark bg-light">
-          <img class="Img card-img-top mx-auto" src="{$value.IMG_SRC}" alt="{$value.IMG_ALT}">
+          <a href="{$value.IMG_SRC}" data-toggle="lightbox" data-gallery="{$value_list.GAL_NAME}" alt="{$value.IMG_ALT}">     
+           <img class="img-fluid" src="{$value.IMG_SRC}">
+          </a>      
           <div class="card-body">
             <p class="card-text">{$value.DESCRIPTION}</p>
           </div>
@@ -21,12 +23,5 @@
    {/foreach}
     
   </div>
-</div>
-
-<!-- Modal -->
-<div id="ImgModal" class="modal">
-  <span class="close">&times;</span>
-  <img src="_" class="modal-content" alt="">
-  <div id="caption"></div>
 </div>
 

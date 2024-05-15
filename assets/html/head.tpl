@@ -60,10 +60,7 @@
 
      <!-- bootstrap-table-filter-control JS --> 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.0/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>{/if}
-
-     {if {$page} == 'gallery'}<!-- page-gallery CSS -->
-      <link rel="stylesheet" href="assets/css/gallery.css" media="all">{/if}
-     
+    
      {if {$page} == 'admin_bookings'}<!-- page-admin_bookings CSS -->
       <link rel="stylesheet" href="assets/css/admin_bookings.css" media="all">{/if}   
      

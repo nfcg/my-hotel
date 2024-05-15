@@ -34,8 +34,8 @@
       {if {$page} == 'contact'}<!-- page-contact JS -->
       <script src="assets/js/contact.js"></script>{/if}
 
-      {if {$page} == 'gallery'}<!-- page-gallery JS -->
-      <script src="assets/js/gallery.js"></script>{/if}
+      {if {$page} == 'gallery'}<!-- bs5-lightbox JS -->
+      <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>{/if}
 
       {if {$page} == 'login'}<!-- page-login JS -->
       <script src="assets/js/login.js?domain=domain"></script>{/if}

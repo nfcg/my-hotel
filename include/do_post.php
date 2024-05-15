@@ -417,13 +417,15 @@ HTML;
 </html>
 HTML;
 
-            $headers[] = "MIME-Version: 1.0";
-            $headers[] = "Content-type: text/html; charset=utf-8";
-            $headers[] = "From: Bookings <$booking_mail_from>";
-            $headers[] = "Reply-To: Bookings <$booking_mail_from>";
-            $headers[] = "X-Mailer: PHP/" . phpversion();
-            $headers[] = "Importance: high";
-            $headers[] = "Return-Path: Bookings <$booking_mail_from>";
+            $headers = [
+                "MIME-Version: 1.0",
+                "Content-type: text/html; charset=utf-8",
+                "From: Bookings <$booking_mail_from>",
+                "Reply-To: Bookings <$booking_mail_from>",
+                "X-Mailer: PHP/" . phpversion(),
+                "Importance: high",
+                "Return-Path: Bookings <$booking_mail_from>"                
+            ];
 
             mail(
                 $email,
@@ -431,6 +433,7 @@ HTML;
                 $message_guest,
                 implode("\r\n", $headers)
             );
+            
             mail(
                 $booking_mail_from,
                 "✔️ You Have Received a New Booking",
@@ -442,17 +445,14 @@ HTML;
                 '{"response": "ok", "message": "' .
                 $YOUR_RESERVATION_CONFIRMED .
                 '"}';
-            header("Content-Type: application/json");
+                
+            header("Content-Type: application/json; charset=utf-8");
             echo $response;
         } catch (Exception $e) {
-            $message =
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Warning! </strong>' .
-                $e->getMessage() .
-                ' !<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button></div>';
             $response =
                 '{"response": "error", "message": "' . $e->getMessage() . '"}';
 
-            header("Content-Type: application/json");
+            header("Content-Type: application/json; charset=utf-8");
             echo $response;
         }
 
@@ -607,13 +607,12 @@ HTML;
                 '{"response": "ok", "message": "' .
                 $CONTACT_FORM_SUCCESS .
                 '"}';
-            header("Content-Type: application/json");
+            header("Content-Type: application/json; charset=utf-8");
             echo $response;
         } catch (Exception $e) {
-            $message = "<strong>" . $e->getMessage() . "</strong>";
-            $response = '{"response": "error", "message": "' . $message . '"}';
+            $response = '{"response": "error", "message": "' . "<strong>" . $e->getMessage() . "</strong>" . '"}';
 
-            header("Content-Type: application/json");
+            header("Content-Type: application/json; charset=utf-8");
             echo $response;
         }
 
@@ -640,7 +639,6 @@ HTML;
                     $CRYPTED = $row["CRYPTED"];
                     $ID = $row["ID"];
                     $user = $row["USER"];
-
                     $USER_NAME = $row["USER_NAME"];
                     $USER_TYPE = $row["USER_TYPE"];
                     $USER_EMAIL = $row["USER_EMAIL"];
@@ -672,24 +670,21 @@ HTML;
                         setcookie("password", "", $cookie_params);
                     }
 
-                    $message =
-                        "<strong>" . "authentication_successful" . "</strong>";
                     $response =
                         '{"response": "ok", "message": "' .
                         $_COOKIE["origin_ref"] .
                         '"}';
 
-                    header("Content-Type: application/json");
+                    header("Content-Type: application/json; charset=utf-8");
                     echo $response;
                 } else {
                     throw new Exception($INCORRECT_USERNAME_PASSWORD);
                 }
             }
         } catch (Exception $e) {
-            $message = "<strong>" . $e->getMessage() . "</strong>";
-            $response = '{"response": "error", "message": "' . $message . '"}';
+            $response = '{"response": "error", "message": "' . "<strong>" . $e->getMessage() . "</strong>" . '"}';
 
-            header("Content-Type: application/json");
+            header("Content-Type: application/json; charset=utf-8");
             echo $response;
         }
 
@@ -706,7 +701,7 @@ HTML;
         $select = sqlite("QUERY_FETCH_ASSOC",
             "SELECT * FROM ROOMS WHERE ID = '$select';");
 
-        header("Content-Type: application/json");
+        header("Content-Type: application/json; charset=utf-8");
         echo json_encode($select[0]);
 
         break;
@@ -735,7 +730,7 @@ HTML;
         $select = sqlite("QUERY_FETCH_ASSOC",
             "SELECT * FROM SERVICES WHERE ID = '$select';");
 
-        header("Content-Type: application/json");
+        header("Content-Type: application/json; charset=utf-8");
         echo json_encode($select[0]);
 
         break;
@@ -764,7 +759,7 @@ HTML;
         $select = sqlite("QUERY_FETCH_ASSOC",
             "SELECT * FROM IMAGES WHERE ID = '$select';");
 
-        header("Content-Type: application/json");
+        header("Content-Type: application/json; charset=utf-8");
         echo json_encode($select[0]);
 
         break;
@@ -1090,9 +1085,9 @@ HTML;
         $date = date("Y-m-d H:i:s");
 
 /*
-    $available = sqlite("QUERY_FETCH_ASSOC",
-      "SELECT COUNT(*) AS count FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';");
-    $available = $available["0"]["count"];
+        $available = sqlite("QUERY_FETCH_ASSOC",
+            "SELECT COUNT(*) AS count FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';");
+        $available = $available["0"]["count"];
 */
 
         $total_price = sqlite("QUERY_FETCH_ASSOC",
@@ -1102,7 +1097,7 @@ HTML;
 
         $response = '{"response": "ok", "message": "' . "$total_price €" . '"}';
 
-        header("Content-Type: application/json");
+        header("Content-Type: application/json; charset=utf-8");
         echo $response;
 
         break;
@@ -1176,13 +1171,12 @@ HTML;
                 $PASSWORD_CHANGED_SUCCESSFULLY .
                 '"}';
 
-            header("Content-Type: application/json");
+            header("Content-Type: application/json; charset=utf-8");
             echo $response;
         } catch (Exception $e) {
-            $message = "<strong>" . $e->getMessage() . "</strong>";
-            $response = '{"response": "error", "message": "' . $message . '"}';
+            $response = '{"response": "error", "message": "' . "<strong>" . $e->getMessage() . "</strong>" . '"}';
 
-            header("Content-Type: application/json");
+            header("Content-Type: application/json; charset=utf-8");
             echo $response;
         }
 
@@ -1196,13 +1190,13 @@ HTML;
             $response =
                 '{"response": "ok", "message": "' . "Language Changed" . '"}';
 
-            header("Content-Type: application/json");
+            header("Content-Type: application/json; charset=utf-8");
             echo $response;
         } catch (Exception $e) {
             $response =
                 '{"response": "error", "message": "' . $e->getMessage() . '"}';
 
-            header("Content-Type: application/json");
+            header("Content-Type: application/json; charset=utf-8");
             echo $response;
         }
 
