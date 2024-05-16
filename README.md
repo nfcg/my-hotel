@@ -3,6 +3,7 @@
  
   Written in php and using the sqlite database, it is best suited to small and medium-sized hotels or hostels.
  
+  Multi-language English and Portuguese.
  
 ## Requirements
  - PHP 7.0+
