@@ -9,6 +9,7 @@ $site_start_year      = '2023';
 $new_booking_status   = "confirmed"; // confirmed or pending
 $seo_links            = false; // true or false // webserver configuration needed
 $login_link           = true; // true or false  //Show Log-In Link in Navbar
+$api_array            = ['4f3ecd4898224267a50c'];
 $default_language     = "en";
 $languages            = ['en','pt_PT'];
 

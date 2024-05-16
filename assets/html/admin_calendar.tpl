@@ -64,6 +64,10 @@
               <input type="number" min="0" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="add_price_{$value.TYPE}" id="add_price_{$value.TYPE}">
             </div>
             <div class="input-group p-2">
+              <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$MAX_LOTATION}</span>
+              <input type="number" min="1" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="add_lotation_{$value.TYPE}" id="add_lotation_{$value.TYPE}">
+            </div>
+            <div class="input-group p-2">
               <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$STATUS}</span>
               <select id="add_status_{$value.TYPE}" name="add_status_{$value.TYPE}" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0">
                 <option value="open">{$OPEN}</option>

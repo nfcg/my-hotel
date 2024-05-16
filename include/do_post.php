@@ -449,6 +449,10 @@ HTML;
             header("Content-Type: application/json; charset=utf-8");
             echo $response;
         } catch (Exception $e) {
+            $message =
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Warning! </strong>' .
+                $e->getMessage() .
+                ' !<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button></div>';
             $response =
                 '{"response": "error", "message": "' . $e->getMessage() . '"}';
 
@@ -610,7 +614,8 @@ HTML;
             header("Content-Type: application/json; charset=utf-8");
             echo $response;
         } catch (Exception $e) {
-            $response = '{"response": "error", "message": "' . "<strong>" . $e->getMessage() . "</strong>" . '"}';
+            $message = "<strong>" . $e->getMessage() . "</strong>";
+            $response = '{"response": "error", "message": "' . $message . '"}';
 
             header("Content-Type: application/json; charset=utf-8");
             echo $response;
@@ -639,6 +644,7 @@ HTML;
                     $CRYPTED = $row["CRYPTED"];
                     $ID = $row["ID"];
                     $user = $row["USER"];
+
                     $USER_NAME = $row["USER_NAME"];
                     $USER_TYPE = $row["USER_TYPE"];
                     $USER_EMAIL = $row["USER_EMAIL"];
@@ -670,6 +676,8 @@ HTML;
                         setcookie("password", "", $cookie_params);
                     }
 
+                    $message =
+                        "<strong>" . "authentication_successful" . "</strong>";
                     $response =
                         '{"response": "ok", "message": "' .
                         $_COOKIE["origin_ref"] .
@@ -682,7 +690,8 @@ HTML;
                 }
             }
         } catch (Exception $e) {
-            $response = '{"response": "error", "message": "' . "<strong>" . $e->getMessage() . "</strong>" . '"}';
+            $message = "<strong>" . $e->getMessage() . "</strong>";
+            $response = '{"response": "error", "message": "' . $message . '"}';
 
             header("Content-Type: application/json; charset=utf-8");
             echo $response;
@@ -1034,6 +1043,7 @@ HTML;
                     ${"add_availability_$type"} =
                         $_POST["add_availability_$type"];
                     ${"add_price_$type"} = $_POST["add_price_$type"];
+                    ${"add_lotation_$type"} = $_POST["add_lotation_$type"];
                     ${"add_status_$type"} = $_POST["add_status_$type"];
 
                     $values = [
@@ -1041,11 +1051,12 @@ HTML;
                         "$type",
                         ${"add_availability_" . $type},
                         ${"add_price_" . $type},
+                        ${"add_lotation_" . $type},
                         ${"add_status_" . $type}
                     ];
 
                     $insert = sqlite("INSERT",
-                        "INSERT INTO CALENDAR (DAY,ROOM_TYPE,AVAILABILITY,PRICE,STATUS) VALUES (?,?,?,?,?);");
+                        "INSERT INTO CALENDAR (DAY,ROOM_TYPE,AVAILABILITY,PRICE,MAX_LOTATION,STATUS) VALUES (?,?,?,?,?,?);");
 
                     if ($insert <= 0) {
                         throw new Exception($ROW_INSERT_FAIL);
@@ -1085,9 +1096,9 @@ HTML;
         $date = date("Y-m-d H:i:s");
 
 /*
-        $available = sqlite("QUERY_FETCH_ASSOC",
-            "SELECT COUNT(*) AS count FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';");
-        $available = $available["0"]["count"];
+    $available = sqlite("QUERY_FETCH_ASSOC",
+      "SELECT COUNT(*) AS count FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';");
+    $available = $available["0"]["count"];
 */
 
         $total_price = sqlite("QUERY_FETCH_ASSOC",
@@ -1174,7 +1185,8 @@ HTML;
             header("Content-Type: application/json; charset=utf-8");
             echo $response;
         } catch (Exception $e) {
-            $response = '{"response": "error", "message": "' . "<strong>" . $e->getMessage() . "</strong>" . '"}';
+            $message = "<strong>" . $e->getMessage() . "</strong>";
+            $response = '{"response": "error", "message": "' . $message . '"}';
 
             header("Content-Type: application/json; charset=utf-8");
             echo $response;
@@ -1200,6 +1212,68 @@ HTML;
             echo $response;
         }
 
+        break;
+    case "calendar_api":    
+        if (!empty($_GET["key"])) {
+            $key = $_GET["key"];
+        } else {
+            $key = '';
+        }
+        
+        if (!empty($_GET["from"])) {
+            $from = $_GET["from"];
+        } else {
+            $from = date('Y-m-d');
+        }
+
+        if (!empty($_GET["to"])) {
+            $to = $_GET["to"];
+        } else {
+            $to = date('Y-m-d', strtotime('Dec 31'));
+        }
+
+        if (!empty($_GET["type"])) {
+            $type = "'". $_GET["type"] ."'";
+        } else {
+            $type = "'". implode( "', '", array_column($room_types, 'TYPE') ) ."'"; 
+        }
+
+        if (!empty($_GET["available"])) {
+            $available = "'". $_GET["available"] ."'";
+        } else {
+            $available = "'true', 'false'";
+        }
+
+        if (!empty($_GET["content"])) {
+            $content = $_GET["content"];
+        } else {
+            $content = "xml";
+        }
+
+        if (!empty($_GET["lotation"])) {
+            $lotation = $_GET["lotation"];
+        } else {
+            $lotation = "1";
+        }
+        
+        if (in_array($key, $api_array)) {
+        
+        $select_calendar = sqlite("QUERY_FETCH_ASSOC",
+            "SELECT DAY, ROOM_TYPE, MAX_LOTATION, PRICE, CASE WHEN AVAILABILITY > 0 AND STATUS = 'open' THEN 'true' else 'false' END AS AVAILABLE FROM 'CALENDAR' WHERE DAY BETWEEN '$from' AND '$to' AND MAX_LOTATION >= '$lotation' AND AVAILABLE IN ($available) AND ROOM_TYPE IN ($type);");
+   
+          if ($content == 'xml') {
+              header("Content-Type: application/xml; charset=utf-8");
+              echo arrayToXML($select_calendar, new SimpleXMLElement("<calendar/>"), "room");
+          } else {
+              header("Content-Type: application/json; charset=utf-8");
+              echo json_encode(["room" => $select_calendar], JSON_PRETTY_PRINT, JSON_UNESCAPED_UNICODE);
+          }
+        
+        } else {
+            header("Content-Type: application/json; charset=utf-8");
+            echo '{"response": "error", "message": "' . $NOT_ALLOWED . '"}';;
+        }
+        
         break;
     default:
         echo $NOT_ALLOWED;
