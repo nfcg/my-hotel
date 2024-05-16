@@ -1,5 +1,12 @@
 # My Hotel
- Hotel Website, Booking and Reservation System
+ Hotel Website, Booking and Reservation System.
+ Written in php and using the sqlite database, it is best suited to small and medium-sized hotels or hostels.
+ 
+ 
+## Requirements
+ - PHP 7.0+
+ - php-sqlite3
+  
 
 ## Demo:
  https://myhotel.nunofcguerreiro.com
