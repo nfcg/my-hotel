@@ -53,91 +53,91 @@ function sqlite($method, $cmd)
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $db->exec("PRAGMA journal_mode = wal;");
         switch ($method) {
-            case "QUERY_KEY_PAIR":
-                try {
-                    $result = $db->query($cmd);
-                    return $result->fetchAll(PDO::FETCH_KEY_PAIR);
+        case "QUERY_KEY_PAIR":
+            try {
+                $result = $db->query($cmd);
+                return $result->fetchAll(PDO::FETCH_KEY_PAIR);
 
-                    $db = null;
-                    unset($db);
-                } catch (PDOException $e) {
-                    echo "Connection Error -->> " .
-                        $e->getMessage() .
-                        "</br>Error Code -->> " .
-                        $e->getCode();
-                    $db = null;
-                    unset($db);
-                    die();
-                }
-                break;
-            case "QUERY_FETCH_ASSOC":
-                try {
-                    $result = $db->query($cmd);
-                    return $result->fetchALL(PDO::FETCH_ASSOC);
+                $db = null;
+                unset($db);
+            } catch (PDOException $e) {
+                echo "Connection Error -->> " .
+                    $e->getMessage() .
+                    "</br>Error Code -->> " .
+                    $e->getCode();
+                $db = null;
+                unset($db);
+                die();
+            }
+            break;
+        case "QUERY_FETCH_ASSOC":
+            try {
+                $result = $db->query($cmd);
+                return $result->fetchALL(PDO::FETCH_ASSOC);
 
-                    $db = null;
-                    unset($db);
-                } catch (PDOException $e) {
-                    echo "Connection Error -->> " .
-                        $e->getMessage() .
-                        "</br>Error Code -->> " .
-                        $e->getCode();
-                    $db = null;
-                    unset($db);
-                    die();
-                }
-                break;
-            case "UPDATE":
-                try {
-                    $update = $db->prepare($cmd);
-                    $update->execute();
-                    return $update->rowCount();
-                    $db = null;
-                    unset($db);
-                } catch (PDOException $e) {
-                    echo "Connection Error -->> " .
-                        $e->getMessage() .
-                        "</br>Error Code -->> " .
-                        $e->getCode();
-                    $db = null;
-                    unset($db);
-                    die();
-                }
-                break;
-            case "INSERT":
-                try {
-                    $qry = $db->prepare($cmd);
-                    $qry->execute($values);
-                    return $db->lastInsertId();
-                    $db = null;
-                    unset($db);
-                } catch (PDOException $e) {
-                    return 0;
-                    $db = null;
-                    unset($db);
-                    die();
-                }
-                break;
-            case "DELETE":
-                try {
-                    $qry = $db->prepare($cmd);
-                    $qry->execute($values);
-                    return $qry->rowCount();
-                    $db = null;
-                    unset($db);
-                } catch (PDOException $e) {
-                    echo "Connection Error -->> " .
-                        $e->getMessage() .
-                        "</br>Error Code -->> " .
-                        $e->getCode();
-                    $db = null;
-                    unset($db);
-                    die();
-                }
-                break;
-            default:
-                echo "Not Allowed";
-                exit();
+                $db = null;
+                unset($db);
+            } catch (PDOException $e) {
+                echo "Connection Error -->> " .
+                    $e->getMessage() .
+                    "</br>Error Code -->> " .
+                    $e->getCode();
+                $db = null;
+                unset($db);
+                die();
+            }
+            break;
+        case "UPDATE":
+            try {
+                $update = $db->prepare($cmd);
+                $update->execute();
+                return $update->rowCount();
+                $db = null;
+                unset($db);
+            } catch (PDOException $e) {
+                echo "Connection Error -->> " .
+                    $e->getMessage() .
+                    "</br>Error Code -->> " .
+                    $e->getCode();
+                $db = null;
+                unset($db);
+                die();
+            }
+            break;
+        case "INSERT":
+            try {
+                $qry = $db->prepare($cmd);
+                $qry->execute($values);
+                return $db->lastInsertId();
+                $db = null;
+                unset($db);
+            } catch (PDOException $e) {
+                return 0;
+                $db = null;
+                unset($db);
+                die();
+            }
+            break;
+        case "DELETE":
+            try {
+                $qry = $db->prepare($cmd);
+                $qry->execute($values);
+                return $qry->rowCount();
+                $db = null;
+                unset($db);
+            } catch (PDOException $e) {
+                echo "Connection Error -->> " .
+                    $e->getMessage() .
+                    "</br>Error Code -->> " .
+                    $e->getCode();
+                $db = null;
+                unset($db);
+                die();
+            }
+            break;
+        default:
+            echo "Not Allowed";
+            exit();
         }
     } catch (PDOException $e) {
         echo "Connection Error -->> " .
@@ -152,8 +152,10 @@ function sqlite($method, $cmd)
 
 $database = "$database_location";
 
-$language = sqlite("QUERY_KEY_PAIR",
-    "SELECT NAME, TRANSLATION FROM 'LANGUAGE_$default_language';");
+$language = sqlite(
+    "QUERY_KEY_PAIR",
+    "SELECT NAME, TRANSLATION FROM 'LANGUAGE_$default_language';"
+);
 $smarty->assign($language);
 
 foreach ($language as $x => $y) {
@@ -184,55 +186,79 @@ $smarty->assign("CC_YEARS", $cc_years);
 $smarty->assign("CC_VAL", $cc_val);
 $smarty->assign("SITE_START_YEAR", $site_start_year);
 
-$gallery_list = sqlite("QUERY_FETCH_ASSOC",
-    "SELECT TYPE, GAL_NAME FROM IMAGES WHERE LANGUAGE = '$default_language' AND TYPE != 'gallery_carousel' GROUP BY TYPE;");
+$gallery_list = sqlite(
+    "QUERY_FETCH_ASSOC",
+    "SELECT TYPE, GAL_NAME FROM IMAGES WHERE LANGUAGE = '$default_language' AND TYPE != 'gallery_carousel' GROUP BY TYPE;"
+);
 $smarty->assign("gallery_list", $gallery_list);
 
-$gallerys = sqlite("QUERY_FETCH_ASSOC", 
-    "SELECT * FROM IMAGES;");
+$gallerys = sqlite(
+    "QUERY_FETCH_ASSOC", 
+    "SELECT * FROM IMAGES;"
+);
 $smarty->assign("images", $gallerys);
 
-$services = sqlite("QUERY_FETCH_ASSOC",
-    "SELECT * FROM SERVICES WHERE LANGUAGE = '$default_language';");
+$services = sqlite(
+    "QUERY_FETCH_ASSOC",
+    "SELECT * FROM SERVICES WHERE LANGUAGE = '$default_language';"
+);
 $smarty->assign("services", $services);
 
-$services_admin = sqlite("QUERY_FETCH_ASSOC", 
-    "SELECT * FROM SERVICES;");
+$services_admin = sqlite(
+    "QUERY_FETCH_ASSOC", 
+    "SELECT * FROM SERVICES;"
+);
 $smarty->assign("services_admin", $services_admin);
 
-$rooms = sqlite("QUERY_FETCH_ASSOC",
-    "SELECT * FROM ROOMS WHERE LANGUAGE = '$default_language';");
+$rooms = sqlite(
+    "QUERY_FETCH_ASSOC",
+    "SELECT * FROM ROOMS WHERE LANGUAGE = '$default_language';"
+);
 $smarty->assign("rooms", $rooms);
 
-$rooms_admin = sqlite("QUERY_FETCH_ASSOC", 
-    "SELECT * FROM ROOMS;");
+$rooms_admin = sqlite(
+    "QUERY_FETCH_ASSOC", 
+    "SELECT * FROM ROOMS;"
+);
 $smarty->assign("rooms_admin", $rooms_admin);
 
-$room_types = sqlite("QUERY_FETCH_ASSOC",
-    "SELECT TYPE FROM ROOMS GROUP BY TYPE;");
+$room_types = sqlite(
+    "QUERY_FETCH_ASSOC",
+    "SELECT TYPE, NAME FROM ROOMS GROUP BY TYPE;"
+);
 $smarty->assign("room_types", $room_types);
 
-$images = sqlite("QUERY_FETCH_ASSOC", 
-    "SELECT * FROM IMAGES;");
+$images = sqlite(
+    "QUERY_FETCH_ASSOC", 
+    "SELECT * FROM IMAGES;"
+);
 $smarty->assign("images", $images);
 
-$carousel = sqlite("QUERY_FETCH_ASSOC",
-    "SELECT * FROM IMAGES WHERE LANGUAGE = '$default_language' AND TYPE = 'gallery_carousel';");
+$carousel = sqlite(
+    "QUERY_FETCH_ASSOC",
+    "SELECT * FROM IMAGES WHERE LANGUAGE = '$default_language' AND TYPE = 'gallery_carousel';"
+);
 $smarty->assign("carousel", $carousel);
 
 $today = date("Y-m-d");
 //$today = '2024-05-01';
 
-$check_in_today = sqlite("QUERY_FETCH_ASSOC",
-    "SELECT substr(DATE,1,4) AS DATE, ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, CHECK_IN, CHECK_OUT FROM BOOKINGS WHERE CHECK_IN = '$today' AND STATUS = 'confirmed';");
+$check_in_today = sqlite(
+    "QUERY_FETCH_ASSOC",
+    "SELECT substr(DATE,1,4) AS DATE, ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, CHECK_IN, CHECK_OUT FROM BOOKINGS WHERE CHECK_IN = '$today' AND STATUS = 'confirmed';"
+);
 $smarty->assign("check_in_today", $check_in_today);
 
-$check_out_today = sqlite("QUERY_FETCH_ASSOC",
-    "SELECT substr(DATE,1,4) AS DATE, ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, CHECK_IN, CHECK_OUT FROM BOOKINGS WHERE CHECK_OUT = '$today' AND STATUS = 'confirmed';");
+$check_out_today = sqlite(
+    "QUERY_FETCH_ASSOC",
+    "SELECT substr(DATE,1,4) AS DATE, ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, CHECK_IN, CHECK_OUT FROM BOOKINGS WHERE CHECK_OUT = '$today' AND STATUS = 'confirmed';"
+);
 $smarty->assign("check_out_today", $check_out_today);
 
-$recent_bookings = sqlite("QUERY_FETCH_ASSOC",
-    "SELECT substr(DATE,1,4) AS DATE, ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, CHECK_IN, CHECK_OUT FROM BOOKINGS WHERE STATUS = 'confirmed' ORDER BY ID DESC LIMIT 5;");
+$recent_bookings = sqlite(
+    "QUERY_FETCH_ASSOC",
+    "SELECT substr(DATE,1,4) AS DATE, ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, CHECK_IN, CHECK_OUT FROM BOOKINGS WHERE STATUS = 'confirmed' ORDER BY ID DESC LIMIT 5;"
+);
 $smarty->assign("recent_bookings", $recent_bookings);
 
 $templates = [
@@ -328,11 +354,13 @@ function my_encode($token)
                 "::" .
                 bin2hex($iv);
 
-            array_push($array, [
+            array_push(
+                $array, [
                 "uuid" => $uuid,
                 "iv" => base64_encode($iv),
                 "crypted" => $crypted_token,
-            ]);
+                ]
+            );
         }
         return $array;
     }
@@ -469,9 +497,8 @@ class CreditCard
         if (empty($type)) {
             $type = self::creditCardType($number);
         }
-        if (
-            array_key_exists($type, self::$cards) &&
-            self::validCard($number, $type)
+        if (array_key_exists($type, self::$cards) 
+            && self::validCard($number, $type)
         ) {
             return ["valid" => true, "number" => $number, "type" => $type];
         }
@@ -624,7 +651,8 @@ $do_admin = [
     "add_year",
     "json_language",
     "save_language",
-    "change_password"
+    "change_password",
+    "bulkupdate_calendar"
 ];
 
 function arrayToXML($array, SimpleXMLElement $xml, $child_name)
