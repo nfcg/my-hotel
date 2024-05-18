@@ -9,10 +9,11 @@
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <button class="nav-link active fw-bold" id="nav-calendar-tab" data-bs-toggle="tab" data-bs-target="#nav-calendar" type="button" role="tab" aria-controls="nav-calendar" aria-selected="true">{$CALENDAR}</button>
         <button class="nav-link fw-bold" id="nav-newyear-tab" data-bs-toggle="tab" data-bs-target="#nav-newyear" type="button" role="tab" aria-controls="nav-newyear" aria-selected="false">{$NEW_YEAR}</button>
+        <button class="nav-link fw-bold" id="nav-bulkupdate-tab" data-bs-toggle="tab" data-bs-target="#nav-bulkupdate" type="button" role="tab" aria-controls="nav-newyear" aria-selected="false">{$BULK_UPDATE}</button>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
-      <div class="nav-calendar tab-pane fade show active" id="nav-calendar" role="tabpanel" aria-labelledby="nav-calendar-tab" tabindex="0">
+      <div class="nav-calendar tab-pane fade show active" id="nav-calendar" role="tabpanel" aria-labelledby="nav-calendar-tab" tabindex="2">
         <div class="row mx-2 mt-5">
           <div class="input-group date input-group-lg" data-target-input="nearest">
             <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$YEAR_MONTH}</span>
@@ -32,21 +33,22 @@
          data-filter-control="true" 
          data-show-search-clear-button="true" 
          data-show-toggle="true" 
-         data-page-list="all">
+         data-page-list="all"
+         data-row-style="rowStyle">
           <thead>
             <tr>
               <th id="ID" data-field="ID" data-searchable="false" data-visible="false" class="tr align-middle">ID</th>
               <th id="DAY" data-field="DAY" data-searchable="true" data-align="center" data-filter-control="select" class="tr align-middle">{$DAY|upper}</th>
               <th id="ROOM_TYPE" data-field="ROOM_TYPE" data-searchable="true" data-filter-control="select" class="tr align-middle">{$ROOM_TYPE|upper}</th>
-              <th id="AVAILABILITY" data-field="AVAILABILITY" data-searchable="false" data-align="center" data-editable="true" data-editable-type="number" class="tr align-middle">{$AVAILABILITY|upper}</th>
+              <th id="AVAILABILITY" data-field="AVAILABILITY" data-searchable="false" data-align="center" data-editable="true" data-editable-type="number" class="tr align-middle" data-cell-style="cellStyle">{$AVAILABILITY|upper}</th>
               <th id="PRICE" data-field="PRICE" data-editable="true" data-searchable="false" data-align="center" class="tr align-middle">{$PRICE|upper}</th>
-              <th id="STATUS" data-field="STATUS" data-editable="true" data-editable-type="select" data-editable-source="['open', 'closed']" data-searchable="false" data-align="center" class="tr align-middle">{$STATUS|upper}</th>
+              <th id="STATUS" data-field="STATUS" data-editable="true" data-editable-type="select" data-editable-source="['open', 'closed']" data-searchable="false" data-align="center" class="tr align-middle" data-cell-style="cellStyle">{$STATUS|upper}</th>
             </tr>
           </thead>
         </table>
       </div>
-      <div class="mt-3 tab-pane fade" id="nav-newyear" role="tabpanel" aria-labelledby="nav-newyear-tab" tabindex="0">
-        <form name="add_year_form" id="login-form" method="post">
+      <div class="mt-3 tab-pane fade" id="nav-newyear" role="tabpanel" aria-labelledby="nav-newyear-tab" tabindex="1">
+        <form name="add_year_form" id="add_year_form"">
           <div class="controls">
             <div class="input-group p-2 mb-3 p-4">
               <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$YEAR}</span>
@@ -87,7 +89,50 @@
           <div id="success" class="px-3 mt-3"></div>
         </form>
       </div>
-    </div>
-    
+      <div class="mt-3 tab-pane fade" id="nav-bulkupdate" role="tabpanel" aria-labelledby="nav-bulkupdate-tab" tabindex="0">
+        <form name="bulkupdate_form" id="bulkupdate_form">
+          <div class="controls">
+            <div class="input-group p-4">
+              <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$ROOM_TYPE}</span>
+              <select id="room" name="room" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0" style="width: auto">
+              <option value="">{$SELECT_ROOM}</option>{foreach $room_types as $value}<option value="{$value.TYPE}">{$value.NAME}</option>{/foreach}
+              </select>
+            </div>
+            <div class="input-group p-2">
+              <span class="bi bi-calendar-check input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">&nbsp;{$FROM}</span>            
+              <input type="text" placeholder="yyyy-MM-dd" class="datetimepicker-input form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="from" name="from">              
+              <span class="bi bi-calendar-check input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">&nbsp;{$TO}</span>            
+              <input type="text" placeholder="yyyy-MM-dd" class="datetimepicker-input form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="to" name="to">              
+            </div>            
+            <div class="input-group p-2">
+              <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$AVAILABILITY}</span>
+              <input type="number" min="0" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="availability" id="availability">
+            </div>
+            <div class="input-group p-2">
+              <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$PRICE}</span>
+              <input type="number" min="0" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="price" id="price">
+            </div>
+            <div class="input-group p-2">
+              <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$STATUS}</span>
+              <select id="status" name="status" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0">
+                <option value="open">{$OPEN}</option>
+                <option value="closed">{$CLOSED}</option>
+              </select>
+            </div>
+            <hr class="mx-auto text-primary">
+          </div>
+          <div class="mt-3 d-grid px-3">
+            <button id="bulkupdate" class="btn btn-outline-primary fw-bold bi bi-floppy" type="submit"> {$SAVE} </button>
+          </div>
+          <div id="pw_bulk" class="px-3 d-flex align-items-center text-primary d-none">
+            <strong>{$PLEASE_WAIT}...</strong>
+            <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+          </div>
+          <div id="error_bulk" class="px-3 mt-3"></div>
+          <div id="success_bulk" class="px-3 mt-3"></div>
+        </form>
+      </div>      
+    </div>    
   </div>
 </div>
+

@@ -1135,29 +1135,28 @@ case "bulkupdate_calendar":
         $price        = $_POST["price"];
         $status       = $_POST["status"];         
 
-
         if (empty($room)) {
-            throw new Exception('INVALID Room Type');
+            throw new Exception($INVALID_ROOM_TYPE);
         }
 
         if (empty($from)) {
-            throw new Exception('INVALID From Date');
+            throw new Exception($INVALID_FROM_DATE);
         }
         
         if (empty($to)) {
-            throw new Exception('INVALID To Date');
+            throw new Exception($INVALID_TO_DATE);
         }
         
         if (empty($availability)) {
-            throw new Exception('INVALID Availability');
+            throw new Exception($INVALID_AVAILABILITY);
         }
         
         if (empty($price)) {
-            throw new Exception('INVALID Price');
+            throw new Exception($INVALID_PRICE);
         }
         
         if (empty($status)) {
-            throw new Exception('INVALID Status');
+            throw new Exception($INVALID_STATUS);
         }
         
 
