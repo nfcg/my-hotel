@@ -203,20 +203,16 @@ new tempusDominus.TempusDominus(document.getElementById('to'), {
   },
 });
 
-function cellStyle(value, row, index) {
-  if ([0, 'closed'].includes(value, row, index)) {
+function rowStyle(row, index) {
+  if ((row.STATUS == 'closed') || (row.AVAILABILITY == '0')) {
     return {
       css: {
-        'font-weight': 'bold',
-        'color': 'black',
-        'background-color': 'red'
+        "background-color": "red", "color": "white", "font-weight": "bold"
       }
-    }
+    };
   }
   return {}
 }
   
   
 
-  
-  

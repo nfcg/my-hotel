@@ -40,9 +40,9 @@
               <th id="ID" data-field="ID" data-searchable="false" data-visible="false" class="tr align-middle">ID</th>
               <th id="DAY" data-field="DAY" data-searchable="true" data-align="center" data-filter-control="select" class="tr align-middle">{$DAY|upper}</th>
               <th id="ROOM_TYPE" data-field="ROOM_TYPE" data-searchable="true" data-filter-control="select" class="tr align-middle">{$ROOM_TYPE|upper}</th>
-              <th id="AVAILABILITY" data-field="AVAILABILITY" data-searchable="false" data-align="center" data-editable="true" data-editable-type="number" class="tr align-middle" data-cell-style="cellStyle">{$AVAILABILITY|upper}</th>
+              <th id="AVAILABILITY" data-field="AVAILABILITY" data-searchable="false" data-align="center" data-editable="true" data-editable-type="number" class="tr align-middle">{$AVAILABILITY|upper}</th>
               <th id="PRICE" data-field="PRICE" data-editable="true" data-searchable="false" data-align="center" class="tr align-middle">{$PRICE|upper}</th>
-              <th id="STATUS" data-field="STATUS" data-editable="true" data-editable-type="select" data-editable-source="['open', 'closed']" data-searchable="false" data-align="center" class="tr align-middle" data-cell-style="cellStyle">{$STATUS|upper}</th>
+              <th id="STATUS" data-field="STATUS" data-editable="true" data-editable-type="select" data-editable-source="['open', 'closed']" data-searchable="false" data-align="center" class="tr align-middle">{$STATUS|upper}</th>
             </tr>
           </thead>
         </table>
