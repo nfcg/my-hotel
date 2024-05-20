@@ -134,7 +134,8 @@
      data-show-search-clear-button="true" 
      data-show-toggle="false" 
      data-page-list="all" 
-     data-index="ID">
+     data-index="ID"
+     data-show-export="true">
       <thead>
         <tr>
           <th id="ID" data-field="ID" data-searchable="false" data-visible="false">ID</th>
@@ -155,3 +156,5 @@
     
   </div>
 </div>
+
+

@@ -59,7 +59,13 @@
       <script src="assets/bootstrap5-editable/js/bootstrap-editable.js"></script>
 
      <!-- bootstrap-table-filter-control JS --> 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.0/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>{/if}
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.0/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+      
+     <!-- tableExport JS --> 
+     <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.29.0/tableExport.min.js"></script>
+     
+     <!-- bootstrap-table-export JS --> 
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.0/dist/extensions/export/bootstrap-table-export.min.js"></script>{/if}
     
      {if {$page} == 'admin_bookings'}<!-- page-admin_bookings CSS -->
       <link rel="stylesheet" href="assets/css/admin_bookings.css" media="all">{/if}   
