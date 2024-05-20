@@ -50,7 +50,7 @@
         </label>
       </div>
       <div id="price_div" style="display: none;" class="bg-white rounded px-2 my-4 mx-5 border border-primary">
-        <label class="custom-control-label fw-bold text-primary" for="price_div">{$PRICE}: <small id="price" class="text-secondary fw-bold"> </small></label>
+        <label class="custom-control-label fw-bold text-primary" for="price_div"> </label>
       </div>
       <div id="h_flname_div" style="display: none;" class="card-header bg-primary rounded-top mx-4 border border-primary">
         <h5 class="text-left text-white fw-bold ms-3 my-1"> {$YOUR_INFORMATION} </h5>

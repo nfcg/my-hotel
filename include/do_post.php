@@ -1199,24 +1199,36 @@ case "booking_price":
     $check_in = date("Y-m-d", strtotime($check_in));
     $ano = date("Y");
     $date = date("Y-m-d H:i:s");
-
-    /*
+    
     $available = sqlite("QUERY_FETCH_ASSOC",
     "SELECT COUNT(*) AS count FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';");
     $available = $available["0"]["count"];
-    */
 
+    if ($available != $n_days) {
+     if (!empty($check_in) && !empty($check_out) && !empty($room_type)) {
+      $response = '{"response": "ok", "message": "' . "$ROOM_NOT_AVAILABLE" . '"}';
+      header("Content-Type: application/json; charset=utf-8");
+      echo $response;
+     } else {
+      header("Content-Type: application/json; charset=utf-8");
+      echo '{"response": "ok", "message": "' . "" . '"}';;
+     }
+    } else {
     $total_price = sqlite(
         "QUERY_FETCH_ASSOC",
         "SELECT SUM(PRICE) AS total_price FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';"
     );
 
-    $total_price = $total_price["0"]["total_price"];
-
-    $response = '{"response": "ok", "message": "' . "$total_price €" . '"}';
-
-    header("Content-Type: application/json; charset=utf-8");
-    echo $response;
+     if (!empty($check_in) && !empty($check_out) && !empty($room_type)) {
+      $total_price = $total_price["0"]["total_price"];
+      $response = '{"response": "ok", "message": "' . "$PRICE: $total_price €" . '"}';
+      header("Content-Type: application/json; charset=utf-8");
+      echo $response;
+     } else {
+      header("Content-Type: application/json; charset=utf-8");
+      echo '{"response": "ok", "message": "' . "" . '"}';;
+     }
+    }
 
     break;
 case "json_language":

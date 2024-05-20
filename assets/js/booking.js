@@ -103,7 +103,7 @@ $(document).ready(function () {
    $("#cc_div").show(), 
    $("#div_canc_pol").show(), 
    $("#h_flname_div").show(),
-   $("#price_div").show(), 
+   $("#price_div").show()
 
   ajaxRequest = $.ajax({
     url: "include/do_post.php?do=booking_price",
@@ -114,7 +114,7 @@ $(document).ready(function () {
   });
 
   ajaxRequest.done(function (response) {
-      $("#price").html(response['message']);
+      $("#price_div").html(response['message']);
 
   });
 
