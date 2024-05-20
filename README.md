@@ -3,7 +3,7 @@ My Hotel
 </h1>
 
 <h3 align="center">
-Hotel Website, Booking and Reservation System.
+Hotel Website and Booking Management System.
 </h3>
 
 Multi-language English and Portuguese. Written in php and using the sqlite database, it is best suited to small and medium-sized hotels or hostels.
@@ -20,7 +20,7 @@ Multi-language English and Portuguese. Written in php and using the sqlite datab
 
 
 ## Installation:
- Clone the repository
+ Clone or Download the Repository
  
  
 ## Configuration
