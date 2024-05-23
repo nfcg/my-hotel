@@ -297,6 +297,22 @@ $smarty->assign("domain", $domain);
 $smarty->assign("http", $http);
 $smarty->assign("seo_links", $seo_links);
 
+if ($seo_links == true) {
+    $smarty->assign("link_booking", "Booking");
+    $smarty->assign("link_rooms", "Rooms");
+    $smarty->assign("link_privacy", "Privacy");
+    $smarty->assign("link_terms", "Terms");
+    $smarty->assign("link_contact", "Contact");
+    $smarty->assign("link_services", "Services");
+} else {
+    $smarty->assign("link_booking", "?page=booking");
+    $smarty->assign("link_rooms", "?page=rooms");
+    $smarty->assign("link_privacy", "?page=privacy");
+    $smarty->assign("link_terms", "?page=terms");
+    $smarty->assign("link_contact", "?page=contact");
+    $smarty->assign("link_services", "?page=services");
+}
+
 function session_started()
 {
     if (isset($_SESSION["SITE"]) && $_SESSION["SITE"] != "") {

@@ -9,11 +9,11 @@
       </div>
       
       <div class="col-auto fw-bold justify-content-between">
-        <a class="fs-5 link-light" href="?page=privacy">{$PRIVACY}</a>
+        <a class="fs-5 link-light" href="{$link_privacy}">{$PRIVACY}</a>
         <span class="text-white mx-1">&middot;</span>
-        <a class="fs-5 link-light" href="?page=terms">{$TERMS}</a>
+        <a class="fs-5 link-light" href="{$link_terms}">{$TERMS}</a>
         <span class="text-white mx-1">&middot;</span>
-        <a class="fs-5 link-light" href="?page=contact">{$CONTACT}</a>
+        <a class="fs-5 link-light" href="{$link_contact}">{$CONTACT}</a>
       </div>
       
     </div>
