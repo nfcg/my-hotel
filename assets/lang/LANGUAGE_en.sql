@@ -1,4 +1,4 @@
--- Adminer 4.8.1 SQLite 3 3.37.2 dump
+-- SQLite 3 3.37.2 dump
 
 DROP TABLE IF EXISTS "LANGUAGE_en";
 CREATE TABLE "LANGUAGE_en" (

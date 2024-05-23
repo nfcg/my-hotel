@@ -23,8 +23,10 @@ if (isset($_SESSION["LAST_ACTIVITY"])) {
 
 if (isset($_SESSION["ID"]) && $_SESSION["ID"] != "") {
     $ID = $_SESSION["ID"];
-    $session = sqlite("QUERY_FETCH_ASSOC",
-        "SELECT USER, USER_NAME, USER_TYPE FROM USERS WHERE ID='$ID';");
+    $session = sqlite(
+        "QUERY_FETCH_ASSOC",
+        "SELECT USER, USER_NAME, USER_TYPE FROM USERS WHERE ID='$ID';"
+    );
 
     $_SESSION["SITE"] = true;
     $_SESSION["USER"] = $session[0]["USER"];
@@ -137,141 +139,141 @@ if ($_SESSION["SITE"] === true) {
 }
 
 switch ($page) {
-    case "rooms":
-        $smarty->assign("page_name", $smarty->getTemplateVars("ROOMS"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_ROOMS_DESCRIPTION")
-        );
-        break;
-    case "services":
-        $smarty->assign("page_name", $smarty->getTemplateVars("SERVICES"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_SERVICES_DESCRIPTION")
-        );
-        break;
-    case "gallery":
-        $smarty->assign("page_name", $smarty->getTemplateVars("GALLERY"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_GALLERY_DESCRIPTION")
-        );
-        break;
-    case "contact":
-        $smarty->assign("page_name", $smarty->getTemplateVars("CONTACT"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_CONTACT_DESCRIPTION")
-        );
-        break;
-    case "privacy":
-        $smarty->assign("page_name", $smarty->getTemplateVars("PRIVACY"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_PRIVACY_DESCRIPTION")
-        );
-        break;
-    case "terms":
-        $smarty->assign("page_name", $smarty->getTemplateVars("TERMS"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_TERMS_DESCRIPTION")
-        );
-        break;
-    case "booking":
-        $smarty->assign("page_name", $smarty->getTemplateVars("BOOKING"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_BOOKING_DESCRIPTION")
-        );
-        break;
-    case "admin_calendar":
-        $smarty->assign("page_name", $smarty->getTemplateVars("ADM_CALENDAR"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_ADM_CALENDAR_DESCRIPTION")
-        );
-        break;
-    case "admin_bookings":
-        $smarty->assign("page_name", $smarty->getTemplateVars("ADM_BOOKINGS"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_ADM_BOOKINGS_DESCRIPTION")
-        );
-        break;
-    case "admin_templates":
-        $smarty->assign("page_name", $smarty->getTemplateVars("ADM_TEMPLATES"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_ADM_TEMPLATES_DESCRIPTION")
-        );
-        break;
-    case "admin_rooms":
-        $smarty->assign("page_name", $smarty->getTemplateVars("ADM_ROOMS"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_ADM_ROOMS_DESCRIPTION")
-        );
-        break;
-    case "admin_services":
-        $smarty->assign("page_name", $smarty->getTemplateVars("ADM_SERVICES"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_ADM_SERVICES_DESCRIPTION")
-        );
-        break;
-    case "admin_gallery":
-        $smarty->assign("page_name", $smarty->getTemplateVars("ADM_GALLERY"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_ADM_GALLERY_DESCRIPTION")
-        );
-        break;
-    case "admin_language":
-        $smarty->assign("page_name", $smarty->getTemplateVars("ADM_LANGUAGE"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_ADM_LANGUAGE_DESCRIPTION")
-        );
-        break;
-    case "admin_home":
-        $smarty->assign("page_name", $smarty->getTemplateVars("ADM_HOME"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_ADM_HOME_DESCRIPTION")
-        );
-        break;
-    case "admin_change_password":
-        $smarty->assign(
-            "page_name",
-            $smarty->getTemplateVars("ADM_CHANGE_PASSWORD")
-        );
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_ADM_CHANGE_PASSWORD_DESCRIPTION")
-        );
-        break;
-    case "login":
-        $smarty->assign("page_name", $smarty->getTemplateVars("LOGIN"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_LOGIN_DESCRIPTION")
-        );
-        break;
-    case "cc":
-        $smarty->assign("page_name", $smarty->getTemplateVars("ADM_CC"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_ADM_CC_DESCRIPTION")
-        );
-        break;
-    default:
-        $smarty->assign("page_name", $smarty->getTemplateVars("HOME"));
-        $smarty->assign(
-            "PAGE_DESCRIPTION",
-            $smarty->getTemplateVars("PAGE_INDEX_DESCRIPTION")
-        );
+case "rooms":
+    $smarty->assign("page_name", $smarty->getTemplateVars("ROOMS"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_ROOMS_DESCRIPTION")
+    );
+    break;
+case "services":
+    $smarty->assign("page_name", $smarty->getTemplateVars("SERVICES"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_SERVICES_DESCRIPTION")
+    );
+    break;
+case "gallery":
+    $smarty->assign("page_name", $smarty->getTemplateVars("GALLERY"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_GALLERY_DESCRIPTION")
+    );
+    break;
+case "contact":
+    $smarty->assign("page_name", $smarty->getTemplateVars("CONTACT"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_CONTACT_DESCRIPTION")
+    );
+    break;
+case "privacy":
+    $smarty->assign("page_name", $smarty->getTemplateVars("PRIVACY"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_PRIVACY_DESCRIPTION")
+    );
+    break;
+case "terms":
+    $smarty->assign("page_name", $smarty->getTemplateVars("TERMS"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_TERMS_DESCRIPTION")
+    );
+    break;
+case "booking":
+    $smarty->assign("page_name", $smarty->getTemplateVars("BOOKING"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_BOOKING_DESCRIPTION")
+    );
+    break;
+case "admin_calendar":
+    $smarty->assign("page_name", $smarty->getTemplateVars("ADM_CALENDAR"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_ADM_CALENDAR_DESCRIPTION")
+    );
+    break;
+case "admin_bookings":
+    $smarty->assign("page_name", $smarty->getTemplateVars("ADM_BOOKINGS"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_ADM_BOOKINGS_DESCRIPTION")
+    );
+    break;
+case "admin_templates":
+    $smarty->assign("page_name", $smarty->getTemplateVars("ADM_TEMPLATES"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_ADM_TEMPLATES_DESCRIPTION")
+    );
+    break;
+case "admin_rooms":
+    $smarty->assign("page_name", $smarty->getTemplateVars("ADM_ROOMS"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_ADM_ROOMS_DESCRIPTION")
+    );
+    break;
+case "admin_services":
+    $smarty->assign("page_name", $smarty->getTemplateVars("ADM_SERVICES"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_ADM_SERVICES_DESCRIPTION")
+    );
+    break;
+case "admin_gallery":
+    $smarty->assign("page_name", $smarty->getTemplateVars("ADM_GALLERY"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_ADM_GALLERY_DESCRIPTION")
+    );
+    break;
+case "admin_language":
+    $smarty->assign("page_name", $smarty->getTemplateVars("ADM_LANGUAGE"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_ADM_LANGUAGE_DESCRIPTION")
+    );
+    break;
+case "admin_home":
+    $smarty->assign("page_name", $smarty->getTemplateVars("ADM_HOME"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_ADM_HOME_DESCRIPTION")
+    );
+    break;
+case "admin_change_password":
+    $smarty->assign(
+        "page_name",
+        $smarty->getTemplateVars("ADM_CHANGE_PASSWORD")
+    );
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_ADM_CHANGE_PASSWORD_DESCRIPTION")
+    );
+    break;
+case "login":
+    $smarty->assign("page_name", $smarty->getTemplateVars("LOGIN"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_LOGIN_DESCRIPTION")
+    );
+    break;
+case "cc":
+    $smarty->assign("page_name", $smarty->getTemplateVars("ADM_CC"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_ADM_CC_DESCRIPTION")
+    );
+    break;
+default:
+    $smarty->assign("page_name", $smarty->getTemplateVars("HOME"));
+    $smarty->assign(
+        "PAGE_DESCRIPTION",
+        $smarty->getTemplateVars("PAGE_INDEX_DESCRIPTION")
+    );
 }
 
 echo '<!DOCTYPE html>
