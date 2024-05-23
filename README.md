@@ -63,17 +63,17 @@ try_files $uri $uri/ @rewrite;
 #### - Contact Us
 ![Screenshot](assets/img/Screen_Shots/My-Hotel_Contactus.png)
 #### - Admin Home
-![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Home - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_Admin_Home.png)
 #### - Admin Bookings
-![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Bookings - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_Admin_Bookings.png)
 #### - Admin Calendar
-![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Calendar - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_Admin_Calendar.png)
 #### - Admin Language
-![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Language - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_Admin_Language.png)
 #### - Admin Gallery
-![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Gallery - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_Admin_Gallery.png)
 #### - Admin Rooms
-![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Rooms - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_Admin_Rooms.png)
 #### - Admin Services
-![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Services - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_Admin_Services.png)
 
