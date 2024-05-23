@@ -50,6 +50,7 @@ $(document).ready(function () {
 });
 
 $('#addservicebtn').click(function () {
+$("#addservice_form").addClass("was-validated");
   $.ajax({
     type: 'POST',
     dataType: 'json',
@@ -64,7 +65,7 @@ $('#addservicebtn').click(function () {
     cache: false,
     success: function (response) {
       if (response['success'] == 'true') {
-       window.location.reload();
+       //window.location.reload();
       } else {
         alert(response['error']);
         $("#addservicebtn").addClass('btn-outline-danger').removeClass('btn-outline-primary');

@@ -16,6 +16,7 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
       <div class="nav-editimage tab-pane fade show active" id="nav-editimage" role="tabpanel" aria-labelledby="nav-editimage-tab" tabindex="0">
+      
         <div class="input-group p-4">
           <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$IMAGES}</span>
           <select id="editimage" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0">
@@ -83,60 +84,64 @@
         <div class="mt-3 d-grid px-3">
           <button id="clone" class="btn btn-outline-primary fw-bold bi bi-floppy" type="button"> {$CLONE_IMAGE}</button>
         </div>
+        
       </div>
+      
       <div class="mt-3 tab-pane fade" id="nav-addgallery" role="tabpanel" aria-labelledby="nav-addgallery-tab" tabindex="0">
+        <form class="needs-validation" name="addgallery_form" id="addgallery_form" novalidate>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$GALLERY}</span>
-          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addgalleryname">
+          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addgalleryname" required>
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$TYPE}</span>
-          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addgallerytype">
+          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addgallerytype" required>
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$LANGUAGE}</span>
-          <select id="addgallerylanguage" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0">
+          <select id="addgallerylanguage" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0" required>
            {foreach $languages as $value}<option value="{$value}">{$value}</option>{/foreach} 
           </select>
         </div>
         <div class="mt-3 d-grid px-3">
           <button id="addgallery" class="btn btn-outline-primary fw-bold bi bi-floppy" type="button"> {$ADD_GALLERY}</button>
         </div>
+        </form>
       </div>
+      
       <div class="mt-3 tab-pane fade" id="nav-addimage" role="tabpanel" aria-labelledby="nav-addimage-tab" tabindex="0">
-        <div class="input-group p-2">
-          <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$NAME}</span>
-          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addimgname">
-        </div>
+        <form class="needs-validation" name="addimage_form" id="addimage_form" novalidate>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$DESCRIPTION}</span>
-          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addimgdescription">
+          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addimgdescription" required>
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$IMG_SRC}</span>
-          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addimgsrc">
+          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addimgsrc" required>
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$IMG_ALT}</span>
-          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addimgalt">
+          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addimgalt" required>
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$TYPE}</span>
-          <select id="addimgtype" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0"> 
+          <select id="addimgtype" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0" required> 
            {foreach $gallery_list as $value}<option value="{$value.TYPE}">{$value.TYPE}</option>{/foreach}<option value="gallery_carousel">gallery_carousel</option>
           </select>
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$LANGUAGE}</span>
-          <select id="addimglanguage" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0"> 
+          <select id="addimglanguage" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0" required> 
            {foreach $languages as $value}<option value="{$value}">{$value}</option>{/foreach} 
           </select>
         </div>
         <div class="mt-3 d-grid px-3">
           <button id="addimgbtn" class="btn btn-outline-primary fw-bold bi bi-floppy" type="button"> {$ADD_IMAGE}</button>
         </div>
+        </form>
       </div>
-      <div class="mt-3 tab-pane fade" id="nav-deleteimage" role="tabpanel" aria-labelledby="nav-deleteimage-tab" tabindex="0">
+      
+      <div class="mt-3 tab-pane fade" id="nav-deleteimage" role="tabpanel" aria-labelledby="nav-deleteimage-tab" tabindex="0">      
         <div class="input-group p-4">
           <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$IMAGES}</span>
           <select id="deleteimageselect" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0" style="width: auto">
@@ -165,8 +170,9 @@
         </div>
         <div class="mt-3 d-grid px-3">
           <button id="deleteimagebtn" class="btn btn-outline-primary fw-bold bi bi-floppy" type="button"> {$DELETE_IMAGE}</button>
-        </div>
+        </div>        
       </div>
+      
       <div class="mt-3 tab-pane fade" id="nav-uploadimage" role="tabpanel" aria-labelledby="nav-uploadimage-tab" tabindex="0">
         <form id="form" enctype="multipart/form-data">
           <div class="input-group p-2">

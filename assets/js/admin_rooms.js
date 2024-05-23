@@ -51,6 +51,7 @@ $(document).ready(function () {
 
 
 $('#addroombtn').click(function () {
+$("#addroom_form").addClass("was-validated");
   $.ajax({
     type: 'POST',
     dataType: 'json',

@@ -48,30 +48,30 @@
         </table>
       </div>
       <div class="mt-3 tab-pane fade" id="nav-newyear" role="tabpanel" aria-labelledby="nav-newyear-tab" tabindex="1">
-        <form name="add_year_form" id="add_year_form"">
+        <form class="needs-validation" name="add_year_form" id="add_year_form" novalidate>
           <div class="controls">
             <div class="input-group p-2 mb-3 p-4">
               <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$YEAR}</span>
-              <input type="text" placeholder="yyyy" class="datetimepicker-input form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="add_year" name="add_year">
+              <input type="text" placeholder="yyyy" class="datetimepicker-input form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="add_year" name="add_year" required>
             </div> {foreach $room_types as $value} <div class="input-group p-2">
               <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$ROOM_TYPE}</span>
               <input type="text" class="form-control bg-light border-top-0 border-primary border-left-0 border-right-0" id="add_room_type_{$value.TYPE}" name="add_room_type_{$value.TYPE}" value="{$value.TYPE}" disabled readonly>
             </div>
             <div class="input-group p-2">
               <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$AVAILABILITY}</span>
-              <input type="number" min="0" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="add_availability_{$value.TYPE}" id="add_availability_{$value.TYPE}">
+              <input type="number" min="0" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="add_availability_{$value.TYPE}" id="add_availability_{$value.TYPE}" required>
             </div>
             <div class="input-group p-2">
               <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$PRICE}</span>
-              <input type="number" min="0" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="add_price_{$value.TYPE}" id="add_price_{$value.TYPE}">
+              <input type="number" min="0" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="add_price_{$value.TYPE}" id="add_price_{$value.TYPE}" required>
             </div>
             <div class="input-group p-2">
               <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$MAX_LOTATION}</span>
-              <input type="number" min="1" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="add_lotation_{$value.TYPE}" id="add_lotation_{$value.TYPE}">
+              <input type="number" min="1" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="add_lotation_{$value.TYPE}" id="add_lotation_{$value.TYPE}" required>
             </div>
             <div class="input-group p-2">
               <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$STATUS}</span>
-              <select id="add_status_{$value.TYPE}" name="add_status_{$value.TYPE}" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0">
+              <select id="add_status_{$value.TYPE}" name="add_status_{$value.TYPE}" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0" required>
                 <option value="open">{$OPEN}</option>
                 <option value="closed">{$CLOSED}</option>
               </select>
@@ -90,31 +90,31 @@
         </form>
       </div>
       <div class="mt-3 tab-pane fade" id="nav-bulkupdate" role="tabpanel" aria-labelledby="nav-bulkupdate-tab" tabindex="0">
-        <form name="bulkupdate_form" id="bulkupdate_form">
+        <form class="needs-validation" name="bulkupdate_form" id="bulkupdate_form" novalidate>
           <div class="controls">
             <div class="input-group p-4">
               <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$ROOM_TYPE}</span>
-              <select id="room" name="room" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0" style="width: auto">
+              <select id="room" name="room" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0" style="width: auto" required>
               <option value="">{$SELECT_ROOM}</option>{foreach $room_types as $value}<option value="{$value.TYPE}">{$value.NAME}</option>{/foreach}
               </select>
             </div>
             <div class="input-group p-2">
               <span class="bi bi-calendar-check input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">&nbsp;{$FROM}</span>            
-              <input type="text" placeholder="yyyy-MM-dd" class="datetimepicker-input form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="from" name="from">              
+              <input type="text" placeholder="yyyy-MM-dd" class="datetimepicker-input form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="from" name="from" required>              
               <span class="bi bi-calendar-check input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">&nbsp;{$TO}</span>            
-              <input type="text" placeholder="yyyy-MM-dd" class="datetimepicker-input form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="to" name="to">              
+              <input type="text" placeholder="yyyy-MM-dd" class="datetimepicker-input form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="to" name="to" required>              
             </div>            
             <div class="input-group p-2">
               <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$AVAILABILITY}</span>
-              <input type="number" min="0" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="availability" id="availability">
+              <input type="number" min="0" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="availability" id="availability" required>
             </div>
             <div class="input-group p-2">
               <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$PRICE}</span>
-              <input type="number" min="0" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="price" id="price">
+              <input type="number" min="0" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" name="price" id="price" required>
             </div>
             <div class="input-group p-2">
               <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$STATUS}</span>
-              <select id="status" name="status" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0">
+              <select id="status" name="status" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0" required>
                 <option value="open">{$OPEN}</option>
                 <option value="closed">{$CLOSED}</option>
               </select>

@@ -13,16 +13,19 @@
             
             <div class="form-floating mb-3">
               <input type="password" class="form-control border rounded-0 rounded-bottom border-primary border-top-0 border-end-0 border-bottom-1" id="cur_password" name="cur_password" placeholder="{$PAGE_CHANGE_PASSWORD_HEADING}" required>
+              <i class="bi bi-eye-slash" id="toggle_cur_password"></i>
               <label class="form-label" for="cur_password"> {$CURRENT_PASSWORD} </label>
             </div>
             
             <div class="form-floating mb-3">
               <input type="password" class="form-control border rounded-0 rounded-bottom border-primary border-top-0 border-end-0 border-bottom-1" id="new_password" name="new_password" placeholder="{$NEW_PASSWORD}" required>
+              <i class="bi bi-eye-slash" id="toggle_new_password"></i>
               <label class="form-label" for="new_password"> {$NEW_PASSWORD} </label>
             </div>
             
             <div class="form-floating mb-3">
               <input type="password" class="form-control border rounded-0 rounded-bottom border-primary border-top-0 border-end-0 border-bottom-1" id="confirm_password" name="confirm_password" placeholder="{$CONFIRM_NEW_PASSWORD}" required>
+              <i class="bi bi-eye-slash" id="toggle_confirm_password"></i>
               <label class="form-label" for="confirm_password"> {$CONFIRM_NEW_PASSWORD} </label>
             </div>
 

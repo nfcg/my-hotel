@@ -18,6 +18,7 @@
             
             <div class="form-floating mb-3">
               <input type="password" class="form-control border rounded-0 rounded-bottom border-primary border-top-0 border-end-0 border-bottom-1" id="password" name="password" placeholder="{$PASSWORD}" required>
+              <i class="bi bi-eye-slash" id="togglePassword"></i>
               <label class="form-label" for="password"> {$PASSWORD} </label>
             </div>
             

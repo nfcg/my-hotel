@@ -109,6 +109,18 @@
         opacity: 0.7;
       }
       </style>{/if}
+      
+    {if {$page} == 'login' || {$page} == 'admin_change_password'}<style>
+      .bi-eye-slash {
+        color: blue;
+        font-size: 24px;
+        position: absolute;
+        z-index: 200;
+        top: 12px;
+        right: 12px;
+        cursor: pointer;
+      }
+      </style>{/if}
 
     {if {$page} == 'booking' || {$page} == 'login' || {$page} == 'admin_change_password'}<script>{literal} 
           (function () {

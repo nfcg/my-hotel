@@ -25,3 +25,29 @@ $('button').click(function (event) {
     }
   });
 });
+
+const toggle_cur_password = document.querySelector('#toggle_cur_password');
+const cur_password = document.querySelector('#cur_password');
+toggle_cur_password.addEventListener('click', () => {
+  const type = cur_password.getAttribute('type') === 'password' ? 'text' : 'password';
+  cur_password.setAttribute('type', type);
+  this.classList.toggle('bi-eye');
+});
+
+const toggle_new_password = document.querySelector('#toggle_new_password');
+const new_password = document.querySelector('#new_password');
+toggle_new_password.addEventListener('click', () => {
+  const type = new_password.getAttribute('type') === 'password' ? 'text' : 'password';
+  new_password.setAttribute('type', type);
+  this.classList.toggle('bi-eye');
+});
+
+const toggle_confirm_password = document.querySelector('#toggle_confirm_password');
+const confirm_password = document.querySelector('#confirm_password');
+toggle_confirm_password.addEventListener('click', () => {
+  const type = confirm_password.getAttribute('type') === 'password' ? 'text' : 'password';
+  confirm_password.setAttribute('type', type);
+  this.classList.toggle('bi-eye');
+});
+
+

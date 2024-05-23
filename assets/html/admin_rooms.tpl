@@ -14,6 +14,7 @@
     </nav>
     
     <div class="tab-content" id="nav-tabContent">
+    
       <div class="nav-editroom tab-pane fade show active" id="nav-editroom" role="tabpanel" aria-labelledby="nav-editroom-tab" tabindex="0">
         <div class="input-group p-4">
           <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$ROOMS}</span>
@@ -101,45 +102,49 @@
           <button id="cloneroombtn" class="btn btn-outline-primary fw-bold bi bi-floppy" type="button"> {$CLONE_ROOM}</button>
         </div>
       </div>
+      
       <div class="mt-3 tab-pane fade" id="nav-addroom" role="tabpanel" aria-labelledby="nav-addroom-tab" tabindex="0">
+        <form class="needs-validation" name="bulkupdate_form" id="addroom_form" novalidate>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$NAME}</span>
           <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroomname">
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$DESCRIPTION}</span>
-          <textarea class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroomdescription" style="height: 130px"></textarea>
+          <textarea class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroomdescription" style="height: 130px" required></textarea>
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$FACILITIES}</span>
-          <textarea class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroomfacilities" style="height: 130px"></textarea>
+          <textarea class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroomfacilities" style="height: 130px" required></textarea>
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$MAX_LOTATION}</span>
-          <input type="number" min="1" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroommaxlotation">
+          <input type="number" min="1" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroommaxlotation" required>
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$IMG_SRC}</span>
-          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroomimgsrc">
+          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroomimgsrc" required>
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$IMG_ALT}</span>
-          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroomimgalt">
+          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroomimgalt" required>
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$TYPE}</span>
-          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroomtype">
+          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addroomtype" required>
         </div>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$LANGUAGE}</span>
-          <select id="addroomlanguage" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0">
+          <select id="addroomlanguage" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0" required>
            {foreach $languages as $value}<option value="{$value}">{$value}</option>{/foreach}
           </select>
         </div>
         <div class="mt-3 d-grid px-3">
           <button id="addroombtn" class="btn btn-outline-primary fw-bold bi bi-floppy" type="button"> {$ADD_ROOM}</button>
         </div>
+        </form>
       </div>
+      
       <div class="mt-3 tab-pane fade" id="nav-deleteroom" role="tabpanel" aria-labelledby="nav-deleteroom-tab" tabindex="0">
         <div class="input-group p-4">
           <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$ROOMS}</span>
@@ -183,6 +188,7 @@
           <button id="deleteroombtn" class="btn btn-outline-primary fw-bold bi bi-floppy" type="button"> {$DELETE_ROOM}</button>
         </div>
       </div>
+      
     </div>
     
   </div>

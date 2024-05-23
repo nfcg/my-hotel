@@ -54,10 +54,10 @@ case "booking":
     }
 
     try {
-        if (empty($check_in)) {
+        if (validateDate($check_in) !== true) {
             throw new Exception($INVALID_CHECKIN_DATE);
         }
-        if (empty($check_out)) {
+        if (validateDate($check_out) !== true) {
             throw new Exception($INVALID_CHECKOUT_DATE);
         }
         if (empty($room_type)) {
@@ -934,6 +934,11 @@ case "admin_gallery_add_image":
     ];
 
     try {
+        foreach ($_POST as $key => $value) {
+         if (empty($value)) {
+             throw new Exception(strtoupper($INVALID) . " - " . strtoupper($key));
+         }
+        }
         $insert = sqlite(
             "INSERT",
             "INSERT INTO IMAGES (DESCRIPTION, IMG_SRC, IMG_ALT, TYPE, LANGUAGE, GAL_NAME) VALUES (?,?,?,?,?,?);"
@@ -971,6 +976,12 @@ case "admin_room_add_room":
     ];
 
     try {
+        foreach ($_POST as $key => $value) {
+         if (empty($value)) {
+             throw new Exception(strtoupper($INVALID) . " - " . strtoupper($key));
+         }
+        }
+    
         $insert = sqlite(
             "INSERT",
             "INSERT INTO ROOMS (NAME, DESCRIPTION, FACILITIES, MAX_LOTATION, IMG_SRC, IMG_ALT, TYPE, LANGUAGE) VALUES (?,?,?,?,?,?,?,?);"
@@ -1021,6 +1032,12 @@ case "admin_service_add_service":
     ];
 
     try {
+        foreach ($_POST as $key => $value) {
+         if (empty($value)) {
+             throw new Exception(strtoupper($INVALID) . " - " . strtoupper($key));
+         }
+        }
+        
         $insert = sqlite(
             "INSERT",
             "INSERT INTO SERVICES (NAME, DESCRIPTION, IMG_SRC, IMG_ALT, LANGUAGE) VALUES (?,?,?,?,?);"

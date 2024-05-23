@@ -1,4 +1,5 @@
 $("button#addyearbtn").click(function(e){
+$("#add_year_form").addClass("was-validated");
 e.preventDefault();
     $.ajax({
       type: 'POST',
@@ -27,6 +28,7 @@ e.preventDefault();
 });
 
 $("button#bulkupdate").click(function(e){
+$("#bulkupdate_form").addClass("was-validated");
 e.preventDefault();
     $.ajax({
       type: 'POST',

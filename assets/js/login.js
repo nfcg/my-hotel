@@ -1,4 +1,5 @@
 $('button').click(function (event) {
+  $("#login-form").addClass("was-validated");
   $('#RequestDiv').show();
   var ajaxRequest;
   event.preventDefault();
@@ -26,13 +27,18 @@ $('button').click(function (event) {
 }else{
     window.location.replace('?page=admin_home');
 }
-      
-      
-      //window.location.replace(response['message'] );
-      //window.history.back();
+
     } else {
       $("#result").html('<div class="alert alert-danger alert-dismissible"><button type="button" class="btn-close" data-bs-dismiss="alert"></button> ' + response['message'] + '</div>');
       $('#RequestDiv').hide();
     }
   });
+});
+
+const togglePassword = document.querySelector('#togglePassword');
+const password = document.querySelector('#password');
+togglePassword.addEventListener('click', () => {
+  const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+  password.setAttribute('type', type);
+  this.classList.toggle('bi-eye');
 });

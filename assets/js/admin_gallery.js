@@ -50,6 +50,7 @@ $(document).ready(function () {
 });
 
 $('#addimgbtn').click(function () {
+$("#addimage_form").addClass("was-validated");
   $.ajax({
     type: 'POST',
     dataType: 'json',
@@ -58,7 +59,7 @@ $('#addimgbtn').click(function () {
     cache: false,
     success: function (response) {
       if (response['success'] == 'true') {
-       window.location.reload();
+       //window.location.reload();
       } else {
         alert(response['error']);
         $("#addimgbtn").addClass('btn-outline-danger').removeClass('btn-outline-primary');
@@ -68,6 +69,7 @@ $('#addimgbtn').click(function () {
 });
 
 $('#addgallery').click(function () {
+$("#addgallery_form").addClass("was-validated");
   $.ajax({
     type: 'POST',
     dataType: 'json',
@@ -76,8 +78,9 @@ $('#addgallery').click(function () {
     cache: false,
     success: function (response) {
       if (response['success'] == 'true') {
-       window.location.reload();
+       //window.location.reload();
       } else {
+        alert(response['error']);
         $("#addgallery").addClass('bi bi-x-square btn-outline-danger disabled').removeClass('bi bi-floppy btn-outline-primary');
       }
     }

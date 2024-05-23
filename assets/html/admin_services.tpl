@@ -15,6 +15,7 @@
     
     <div class="tab-content" id="nav-tabContent">
       <div class="nav-editservice tab-pane fade show active" id="nav-editservice" role="tabpanel" aria-labelledby="nav-editservice-tab" tabindex="0">
+      
         <div class="input-group p-4">
           <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$SERVICES}</span>
           <select id="services" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0" style="width: auto">
@@ -71,6 +72,7 @@
         </div>
       </div>
       <div class="mt-3 tab-pane fade" id="nav-addservice" role="tabpanel" aria-labelledby="nav-addservice-tab" tabindex="0">
+       <form class="needs-validation" name="bulkupdate_form" id="addservice_form" novalidate>
         <div class="input-group p-2">
           <span class="spanleftsize input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$NAME}</span>
           <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0" id="addservicename">
@@ -94,8 +96,10 @@
         <div class="mt-3 d-grid px-3">
           <button id="addservicebtn" class="btn btn-outline-primary fw-bold bi bi-floppy" type="button"> {$ADD_SERVICE}</button>
         </div>
+       </form>
       </div>
       <div class="mt-3 tab-pane fade" id="nav-deleteservice" role="tabpanel" aria-labelledby="nav-deleteservice-tab" tabindex="0">
+      
         <div class="input-group p-4">
           <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$ROOMS}</span>
           <select id="deleteserviceselect" class="form-select bg-white border-top-0 border-primary border-left-0 border-right-0" style="width: auto">
@@ -126,6 +130,7 @@
           <button id="deleteservicebtn" class="btn btn-outline-primary fw-bold bi bi-floppy" type="button"> {$DELETE_SERVICE}</button>
         </div>
       </div>
+      
     </div>
     
   </div>
