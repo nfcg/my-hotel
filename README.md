@@ -48,3 +48,32 @@ try_files $uri $uri/ @rewrite;
 
 ``` 
 
+## ScreenShots
+
+#### - Home
+![Screenshot](assets/img/Screen_Shots/My Hotel - Home - myhotel.nunofcguerreiro.com.png)
+#### - Rooms
+![Screenshot](assets/img/Screen_Shots/My Hotel - Rooms - myhotel.nunofcguerreiro.com.png)
+#### - Services
+![Screenshot](assets/img/Screen_Shots/My Hotel - Services - myhotel.nunofcguerreiro.com.png)
+#### - Gallery
+![Screenshot](assets/img/Screen_Shots/My Hotel - Gallery - myhotel.nunofcguerreiro.com.png)
+#### - BookNow
+![Screenshot](assets/img/Screen_Shots/My Hotel - Book Now - myhotel.nunofcguerreiro.com.png)
+#### - Contact Us
+![Screenshot](assets/img/Screen_Shots/My Hotel - Contact us - myhotel.nunofcguerreiro.com.png)
+#### - Admin Home
+![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Home - myhotel.nunofcguerreiro.com.png)
+#### - Admin Bookings
+![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Bookings - myhotel.nunofcguerreiro.com.png)
+#### - Admin Calendar
+![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Calendar - myhotel.nunofcguerreiro.com.png)
+#### - Admin Language
+![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Language - myhotel.nunofcguerreiro.com.png)
+#### - Admin Gallery
+![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Gallery - myhotel.nunofcguerreiro.com.png)
+#### - Admin Rooms
+![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Rooms - myhotel.nunofcguerreiro.com.png)
+#### - Admin Services
+![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Services - myhotel.nunofcguerreiro.com.png)
+
