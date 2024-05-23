@@ -53,15 +53,15 @@ try_files $uri $uri/ @rewrite;
 #### - Home
 ![Screenshot](assets/img/Screen_Shots/My-Hotel_Home.png)
 #### - Rooms
-![Screenshot](assets/img/Screen_Shots/My Hotel - Rooms - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_Rooms.png)
 #### - Services
-![Screenshot](assets/img/Screen_Shots/My Hotel - Services - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_Services.png)
 #### - Gallery
-![Screenshot](assets/img/Screen_Shots/My Hotel - Gallery - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_Gallery.png)
 #### - BookNow
-![Screenshot](assets/img/Screen_Shots/My Hotel - Book Now - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_BookNow.png)
 #### - Contact Us
-![Screenshot](assets/img/Screen_Shots/My Hotel - Contact us - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_Contactus.png)
 #### - Admin Home
 ![Screenshot](assets/img/Screen_Shots/My Hotel - Admin Home - myhotel.nunofcguerreiro.com.png)
 #### - Admin Bookings
