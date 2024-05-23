@@ -51,7 +51,7 @@ try_files $uri $uri/ @rewrite;
 ## ScreenShots
 
 #### - Home
-![Screenshot](my-hotel/assets/img/Screen_Shots/My Hotel - Home - myhotel.nunofcguerreiro.com.png)
+![Screenshot](assets/img/Screen_Shots/My-Hotel_Home.png)
 #### - Rooms
 ![Screenshot](assets/img/Screen_Shots/My Hotel - Rooms - myhotel.nunofcguerreiro.com.png)
 #### - Services
