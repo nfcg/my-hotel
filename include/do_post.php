@@ -18,30 +18,30 @@ case "booking":
     unset($error);
 
     if (isset($_POST["double_bed"])) {
-        $double_bed = SQLite3::escapeString($_POST["double_bed"]);
+        $double_bed = $_POST["double_bed"];
     } else {
         $double_bed = "false";
     }
     if (isset($_POST["canc_pol"])) {
-        $cancel_policy = SQLite3::escapeString($_POST["canc_pol"]);
+        $cancel_policy = $_POST["canc_pol"];
     } else {
         $cancel_policy = "off";
     }
 
-    $check_in = SQLite3::escapeString($_POST["check_in"]);
-    $check_out = SQLite3::escapeString($_POST["check_out"]);
-    $room_type = SQLite3::escapeString($_POST["room_type"]);
-    $first_name = SQLite3::escapeString($_POST["first_name"]);
-    $last_name = SQLite3::escapeString($_POST["last_name"]);
-    $phone = SQLite3::escapeString($_POST["phone"]);
-    $email = SQLite3::escapeString($_POST["email"]);
-    $comments = SQLite3::escapeString($_POST["comments"]);
-    $cc_type = SQLite3::escapeString($_POST["cc_type"]);
-    $cc_name = SQLite3::escapeString($_POST["cc_name"]);
-    $cc_number = SQLite3::escapeString($_POST["cc_number"]);
-    $cc_expire_m = SQLite3::escapeString($_POST["cc_expire_m"]);
-    $cc_expire_y = SQLite3::escapeString($_POST["cc_expire_y"]);
-    $cc_cvc = SQLite3::escapeString($_POST["cc_cvc"]);
+    $check_in = $_POST["check_in"];
+    $check_out = $_POST["check_out"];
+    $room_type = $_POST["room_type"];
+    $first_name = $_POST["first_name"];
+    $last_name = $_POST["last_name"];
+    $phone = $_POST["phone"];
+    $email = $_POST["email"];
+    $comments = $_POST["comments"];
+    $cc_type = $_POST["cc_type"];
+    $cc_name = $_POST["cc_name"];
+    $cc_number = $_POST["cc_number"];
+    $cc_expire_m = $_POST["cc_expire_m"];
+    $cc_expire_y = $_POST["cc_expire_y"];
+    $cc_cvc = $_POST["cc_cvc"];
 
     $ip = getUserIP();
     $date = date("Y-m-d H:i:s");
@@ -123,10 +123,9 @@ case "booking":
         $check_in = date("Y-m-d", strtotime($check_in));
         $ano = date("Y");
 
-        $available = sqlite(
+        $available = $database_type(
             "QUERY_FETCH_ASSOC",
-            "SELECT COUNT(*) AS count FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';"
-        );
+            "SELECT COUNT(*) AS count FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';"); 
 
         $available = $available["0"]["count"];
 
@@ -134,10 +133,9 @@ case "booking":
             throw new Exception($NO_AVAILABILITY);
         }
 
-        $total_price = sqlite(
+        $total_price = $database_type(
             "QUERY_FETCH_ASSOC",
-            "SELECT SUM(PRICE) AS total_price FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';"
-        );
+            "SELECT SUM(PRICE) AS total_price FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';"); 
 
         $total_price = $total_price["0"]["total_price"];
         $av_price = $total_price / $n_days;
@@ -182,28 +180,24 @@ case "booking":
             $total_price
         ];
 
-        $insert = sqlite(
+        $insert = $database_type(
             "INSERT",
-            "INSERT INTO BOOKINGS (FIRST_NAME, LAST_NAME, PHONE, EMAIL, CHECK_IN, CHECK_OUT, CC_NAME, CC_NUMBER, CC_EXPIRE, CC_CVC, IV_NUMBER, IV_EXPIRE, IV_CVC, ROOM_TYPE, DOUBLE_BED, YEAR, COMMENTS, STATUS, DATE, IP, CANCEL_POLICY, N_DAYS, AV_PRICE, TOTAL_PRICE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
-        );
+            "INSERT INTO BOOKINGS (FIRST_NAME, LAST_NAME, PHONE, EMAIL, CHECK_IN, CHECK_OUT, CC_NAME, CC_NUMBER, CC_EXPIRE, CC_CVC, IV_NUMBER, IV_EXPIRE, IV_CVC, ROOM_TYPE, DOUBLE_BED, YEAR, COMMENTS, STATUS, DATE, IP, CANCEL_POLICY, N_DAYS, AV_PRICE, TOTAL_PRICE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"); 
 
-        $update_arr = sqlite(
+        $update_arr = $database_type(
             "QUERY_FETCH_ASSOC",
-            "SELECT ID FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';"
-        );
+            "SELECT ID FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';"); 
 
         foreach ($update_arr as $id) {
             $id = $id["ID"];
-            $update = sqlite(
+            $update = $database_type(
                 "UPDATE",
-                "UPDATE CALENDAR SET AVAILABILITY = AVAILABILITY -1 WHERE ID = '$id';"
-            );
+                "UPDATE CALENDAR SET AVAILABILITY = AVAILABILITY -1 WHERE ID = '$id';"); 
         }
 
-        $voucher = sqlite(
+        $voucher = $database_type(
             "QUERY_FETCH_ASSOC",
-            "SELECT MAX(ID) AS ID FROM BOOKINGS;"
-        );
+            "SELECT MAX(ID) AS ID FROM BOOKINGS;"); 
                 
         $id = $voucher["0"]["ID"];
         $voucher = $voucher["0"]["ID"] . "-" . date("Y");
@@ -476,10 +470,9 @@ HTML;
 case "json_calendar":
     $currentDate = date("Y-m-d");
 
-    $select_calendar = sqlite(
+    $select_calendar = $database_type(
         "QUERY_FETCH_ASSOC",
-        "SELECT ID, DAY, ROOM_TYPE, AVAILABILITY, PRICE, STATUS FROM CALENDAR WHERE DAY >= '$currentDate' ORDER BY DAY;"
-    );
+        "SELECT ID, DAY, ROOM_TYPE, AVAILABILITY, PRICE, STATUS FROM CALENDAR WHERE DAY >= '$currentDate' ORDER BY DAY;"); 
 
     header("Content-Type: application/json; charset=utf-8");
     echo json_encode(
@@ -494,11 +487,10 @@ case "calendar_update":
     $NAME = $_POST["name"];
     $value = $_POST["value"];
 
-    if (is_numeric($value) OR $value = 'closed' OR $value = 'open') {
-        $update = sqlite(
+    if (in_array($value, array('closed', 'open')) || is_numeric($value)) {
+        $update = $database_type(
             "UPDATE",
-            "UPDATE CALENDAR SET $NAME = '$value' WHERE ID = '$pk';"
-        );
+            "UPDATE CALENDAR SET $NAME = '$value' WHERE ID = '$pk';");        
     } else {
         header("HTTP/1.0 400 Bad Request", true, 400);
         echo $FIELD_REQUIRED;
@@ -506,10 +498,15 @@ case "calendar_update":
 
     break;
 case "json_bookings":
-    $select_bookings = sqlite(
-        "QUERY_FETCH_ASSOC",
-        "SELECT ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, PHONE, EMAIL, CHECK_IN, CHECK_OUT, CC_NAME, CC_NUMBER, CC_CVC, CC_EXPIRE, ROOM_TYPE, DOUBLE_BED, COMMENTS, STATUS, DATE FROM BOOKINGS ORDER BY DATE DESC;"
-    );
+    if ($database_type == 'SQLite') {
+        $select_bookings = $database_type(
+            "QUERY_FETCH_ASSOC",
+            "SELECT ID, FIRST_NAME || ' ' || LAST_NAME AS NAME, PHONE, EMAIL, CHECK_IN, CHECK_OUT, CC_NAME, CC_NUMBER, CC_CVC, CC_EXPIRE, ROOM_TYPE, DOUBLE_BED, COMMENTS, STATUS, DATE FROM BOOKINGS ORDER BY DATE DESC;");
+    } else {
+        $select_bookings = $database_type(
+            "QUERY_FETCH_ASSOC",
+            "SELECT ID, CONCAT(FIRST_NAME, ' ', LAST_NAME) AS NAME, PHONE, EMAIL, CHECK_IN, CHECK_OUT, CC_NAME, CC_NUMBER, CC_CVC, CC_EXPIRE, ROOM_TYPE, DOUBLE_BED, COMMENTS, STATUS, DATE FROM BOOKINGS ORDER BY DATE DESC;");
+    }
 
     header("Content-Type: application/json; charset=utf-8");
     echo json_encode(
@@ -525,10 +522,9 @@ case "calendar_bookings":
     $value = $_POST["value"];
 
     if (!empty($value)) {
-        $update = sqlite(
+        $update = $database_type(
             "UPDATE",
-            "UPDATE BOOKINGS SET $NAME = '$value' WHERE ID = '$pk';"
-        );
+            "UPDATE BOOKINGS SET $NAME = '$value' WHERE ID = '$pk';"); 
     } else {
         header("HTTP/1.0 400 Bad Request", true, 400);
         echo $FIELD_REQUIRED;
@@ -539,10 +535,9 @@ case "my_dencrypt":
     $ID = $_GET["id"];
     $uuid = $_GET["uuid"];
 
-    $select_cc = sqlite(
+    $select_cc = $database_type(
         "QUERY_FETCH_ASSOC",
-        "SELECT substr(DATE,1,4) AS DATE, IV_NUMBER ,CC_NUMBER, IV_EXPIRE, CC_EXPIRE, IV_CVC, CC_CVC FROM BOOKINGS WHERE ID = '$ID';"
-    );
+        "SELECT substr(DATE,1,4) AS DATE, IV_NUMBER ,CC_NUMBER, IV_EXPIRE, CC_EXPIRE, IV_CVC, CC_CVC FROM BOOKINGS WHERE ID = '$ID';"); 
 
     $booking_number = $ID . "-" . $select_cc[0]["DATE"];
 
@@ -657,10 +652,9 @@ case "login":
         $password = $_POST["password"];
 
         if (isset($_POST) && $user != "" && $password != "") {
-            $login = sqlite(
+            $login = $database_type(
                 "QUERY_FETCH_ASSOC",
-                "SELECT ID, UUID, IV, CRYPTED, USER, USER_NAME, USER_TYPE, USER_EMAIL FROM USERS WHERE USER='$user';"
-            );
+                "SELECT ID, UUID, IV, CRYPTED, USER, USER_NAME, USER_TYPE, USER_EMAIL FROM USERS WHERE USER='$user';"); 
 
             foreach ($login as $row) {
                 $UUID = $row["UUID"];
@@ -731,10 +725,9 @@ case "logout":
 case "admin_rooms":
     $select = $_POST["select"];
 
-    $select = sqlite(
+    $select = $database_type(
         "QUERY_FETCH_ASSOC",
-        "SELECT * FROM ROOMS WHERE ID = '$select';"
-    );
+        "SELECT * FROM ROOMS WHERE ID = '$select';"); 
 
     header("Content-Type: application/json; charset=utf-8");
     echo json_encode($select[0]);
@@ -746,10 +739,9 @@ case "save_admin_rooms":
     $value = $_POST["value"];
 
     try {
-        $select = sqlite(
+        $select = $database_type(
             "UPDATE",
-            "UPDATE ROOMS SET '$column' = '$value' WHERE ID = '$select';"
-        );
+            "UPDATE ROOMS SET $column = '$value' WHERE ID = '$select';"); 
 
         if ($select !== 1) {
             throw new Exception($UPDATE_FAIL);
@@ -764,10 +756,9 @@ case "save_admin_rooms":
 case "admin_services":
     $select = $_POST["select"];
 
-    $select = sqlite(
+    $select = $database_type(
         "QUERY_FETCH_ASSOC",
-        "SELECT * FROM SERVICES WHERE ID = '$select';"
-    );
+        "SELECT * FROM SERVICES WHERE ID = '$select';"); 
 
     header("Content-Type: application/json; charset=utf-8");
     echo json_encode($select[0]);
@@ -779,10 +770,9 @@ case "save_admin_services":
     $value = $_POST["value"];
 
     try {
-        $select = sqlite(
+        $select = $database_type(
             "UPDATE",
-            "UPDATE SERVICES SET '$column' = '$value' WHERE ID = '$select';"
-        );
+            "UPDATE SERVICES SET $column = '$value' WHERE ID = '$select';"); 
 
         if ($select !== 1) {
             throw new Exception("update fail");
@@ -797,10 +787,9 @@ case "save_admin_services":
 case "admin_gallery":
     $select = $_POST["select"];
 
-    $select = sqlite(
+    $select = $database_type(
         "QUERY_FETCH_ASSOC",
-        "SELECT * FROM IMAGES WHERE ID = '$select';"
-    );
+        "SELECT * FROM IMAGES WHERE ID = '$select';"); 
 
     header("Content-Type: application/json; charset=utf-8");
     echo json_encode($select[0]);
@@ -812,10 +801,9 @@ case "save_admin_gallery":
     $value = $_POST["value"];
 
     try {
-        $select = sqlite(
+        $select = $database_type(
             "UPDATE",
-            "UPDATE IMAGES SET '$column' = '$value' WHERE ID = '$select';"
-        );
+            "UPDATE IMAGES SET $column = '$value' WHERE ID = '$select';"); 
 
         if ($select !== 1) {
             throw new Exception($UPDATE_FAIL);
@@ -874,10 +862,9 @@ case "admin_gallery_add_gallery":
         ];
 
         try {
-            $insert = sqlite(
+            $insert = $database_type(
                 "INSERT",
-                "INSERT INTO IMAGES (IMG_ALT, DESCRIPTION, IMG_SRC, TYPE, LANGUAGE, GAL_NAME) VALUES (?,?,?,?,?,?);"
-            );
+                "INSERT INTO IMAGES (IMG_ALT, DESCRIPTION, IMG_SRC, TYPE, LANGUAGE, GAL_NAME) VALUES (?,?,?,?,?,?);"); 
 
             if ($insert > 0) {
                 // echo json_encode(["success" => "true"]);
@@ -895,10 +882,9 @@ case "admin_gallery_delete_image":
     $id = $_POST["id"];
 
     try {
-        $delete = sqlite(
+        $delete = $database_type(
             "DELETE", 
-            "DELETE FROM IMAGES WHERE ID = '$id';"
-        );
+            "DELETE FROM IMAGES WHERE ID = '$id';"); 
 
         if ($delete == 1) {
             echo json_encode(["success" => "true"]);
@@ -917,10 +903,9 @@ case "admin_gallery_add_image":
     $imgtype = $_POST["imgtype"];
     $imglanguage = $_POST["imglanguage"];
 
-    $select = sqlite(
+    $select = $database_type(
         "QUERY_FETCH_ASSOC",
-        "SELECT GAL_NAME FROM IMAGES WHERE TYPE = '$imgtype' LIMIT 1;"
-    );
+        "SELECT GAL_NAME FROM IMAGES WHERE TYPE = '$imgtype' LIMIT 1;"); 
 
     $galleryname = $select[0]["GAL_NAME"];
 
@@ -939,10 +924,9 @@ case "admin_gallery_add_image":
              throw new Exception(strtoupper($INVALID) . " - " . strtoupper($key));
          }
         }
-        $insert = sqlite(
+        $insert = $database_type(
             "INSERT",
-            "INSERT INTO IMAGES (DESCRIPTION, IMG_SRC, IMG_ALT, TYPE, LANGUAGE, GAL_NAME) VALUES (?,?,?,?,?,?);"
-        );
+            "INSERT INTO IMAGES (DESCRIPTION, IMG_SRC, IMG_ALT, TYPE, LANGUAGE, GAL_NAME) VALUES (?,?,?,?,?,?);"); 
 
         if ($insert > 0) {
             echo json_encode(["success" => "true"]);
@@ -982,10 +966,9 @@ case "admin_room_add_room":
          }
         }
     
-        $insert = sqlite(
+        $insert = $database_type(
             "INSERT",
-            "INSERT INTO ROOMS (NAME, DESCRIPTION, FACILITIES, MAX_LOTATION, IMG_SRC, IMG_ALT, TYPE, LANGUAGE) VALUES (?,?,?,?,?,?,?,?);"
-        );
+            "INSERT INTO ROOMS (NAME, DESCRIPTION, FACILITIES, MAX_LOTATION, IMG_SRC, IMG_ALT, TYPE, LANGUAGE) VALUES (?,?,?,?,?,?,?,?);"); 
 
         if ($insert > 0) {
             echo json_encode(["success" => "true"]);
@@ -1001,10 +984,9 @@ case "admin_room_delete_room":
     $id = $_POST["id"];
 
     try {
-        $delete = sqlite(
+        $delete = $database_type(
             "DELETE", 
-            "DELETE FROM ROOMS WHERE ID = '$id';"
-        );
+            "DELETE FROM ROOMS WHERE ID = '$id';"); 
 
         if ($delete == 1) {
             echo json_encode(["success" => "true"]);
@@ -1038,10 +1020,9 @@ case "admin_service_add_service":
          }
         }
         
-        $insert = sqlite(
+        $insert = $database_type(
             "INSERT",
-            "INSERT INTO SERVICES (NAME, DESCRIPTION, IMG_SRC, IMG_ALT, LANGUAGE) VALUES (?,?,?,?,?);"
-        );
+            "INSERT INTO SERVICES (NAME, DESCRIPTION, IMG_SRC, IMG_ALT, LANGUAGE) VALUES (?,?,?,?,?);"); 
 
         if ($insert > 0) {
             echo json_encode(["success" => "true"]);
@@ -1057,10 +1038,9 @@ case "admin_service_delete_service":
     $id = $_POST["id"];
 
     try {
-        $delete = sqlite(
+        $delete = $database_type(
             "DELETE",
-            "DELETE FROM SERVICES WHERE ID = '$id';"
-        );
+            "DELETE FROM SERVICES WHERE ID = '$id';"); 
 
         if ($delete == 1) {
             echo json_encode(["success" => "true"]);
@@ -1093,10 +1073,9 @@ case "add_year":
         $interval = DateInterval::createFromDateString("1 day");
         $period = new DatePeriod($start, $interval, $end);
 
-        $year_exists = sqlite(
+        $year_exists = $database_type(
             "QUERY_FETCH_ASSOC",
-            "SELECT COUNT(DAY) AS COUNT FROM CALENDAR WHERE DAY LIKE '%$add_year-%';"
-        );
+            "SELECT COUNT(DAY) AS COUNT FROM CALENDAR WHERE DAY LIKE '%$add_year-%';"); 
 
         if (empty($add_year)) {
             throw new Exception($INVALID_YEAR);
@@ -1126,10 +1105,9 @@ case "add_year":
                     ${"add_status_" . $type}
                 ];
 
-                $insert = sqlite(
+                $insert = $database_type(
                     "INSERT",
-                    "INSERT INTO CALENDAR (DAY,ROOM_TYPE,AVAILABILITY,PRICE,MAX_LOTATION,STATUS) VALUES (?,?,?,?,?,?);"
-                );
+                    "INSERT INTO CALENDAR (DAY,ROOM_TYPE,AVAILABILITY,PRICE,MAX_LOTATION,STATUS) VALUES (?,?,?,?,?,?);"); 
 
                 if ($insert <= 0) {
                     throw new Exception($ROW_INSERT_FAIL);
@@ -1176,11 +1154,9 @@ case "bulkupdate_calendar":
             throw new Exception($INVALID_STATUS);
         }
         
-
-        $update_calendar = sqlite(
+        $update_calendar = $database_type(
             "UPDATE",
-            "UPDATE CALENDAR SET AVAILABILITY = '$availability', PRICE = '$price', STATUS = '$status' WHERE DATE(DAY) BETWEEN '$from' AND '$to' AND ROOM_TYPE = '$room';"
-        );
+            "UPDATE CALENDAR SET AVAILABILITY = '$availability', PRICE = '$price', STATUS = '$status' WHERE DATE(DAY) BETWEEN '$from' AND '$to' AND ROOM_TYPE = '$room';"); 
 
         if ($update_calendar == 0) {
             throw new Exception($UPDATE_FAIL);
@@ -1193,9 +1169,9 @@ case "bulkupdate_calendar":
 
     break;
 case "booking_price":
-    $check_in = SQLite3::escapeString($_POST["check_in"]);
-    $check_out = SQLite3::escapeString($_POST["check_out"]);
-    $room_type = SQLite3::escapeString($_POST["room_type"]);
+    $check_in = $_POST["check_in"];
+    $check_out = $_POST["check_out"];
+    $room_type = $_POST["room_type"];
 
     $check_in_dif = date_create($check_in);
     $check_out_dif = date_create("$check_out");
@@ -1217,8 +1193,9 @@ case "booking_price":
     $ano = date("Y");
     $date = date("Y-m-d H:i:s");
     
-    $available = sqlite("QUERY_FETCH_ASSOC",
-    "SELECT COUNT(*) AS count FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';");
+    $available = $database_type("QUERY_FETCH_ASSOC",
+    "SELECT COUNT(*) AS count FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';"); 
+    
     $available = $available["0"]["count"];
 
     if ($available != $n_days) {
@@ -1231,10 +1208,9 @@ case "booking_price":
       echo '{"response": "ok", "message": "' . "" . '"}';;
      }
     } else {
-    $total_price = sqlite(
+    $total_price = $database_type(
         "QUERY_FETCH_ASSOC",
-        "SELECT SUM(PRICE) AS total_price FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';"
-    );
+        "SELECT SUM(PRICE) AS total_price FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND ROOM_TYPE = '$room_type' AND AVAILABILITY != 0  AND STATUS != 'closed';"); 
 
      if (!empty($check_in) && !empty($check_out) && !empty($room_type)) {
       $total_price = $total_price["0"]["total_price"];
@@ -1250,10 +1226,9 @@ case "booking_price":
     break;
 case "json_language":
     $language = $_GET["language"];
-    $select_language = sqlite(
+    $select_language = $database_type(
         "QUERY_FETCH_ASSOC",
-        "SELECT ID, NAME, TRANSLATION FROM 'LANGUAGE_$language';"
-    );
+        "SELECT ID, NAME, TRANSLATION FROM LANGUAGE_$language;"); 
 
     header("Content-Type: application/json; charset=utf-8");
     echo json_encode(
@@ -1270,10 +1245,9 @@ case "save_language":
     $language = $_POST["language"];
 
     if (!empty($value)) {
-        $update = sqlite(
+        $update = $database_type(
             "UPDATE",
-            "update 'LANGUAGE_$language' SET $TRANSLATION = '$value' WHERE ID = '$pk';"
-        );
+            "UPDATE LANGUAGE_$language SET $TRANSLATION = '$value' WHERE ID = '$pk';"); 
     } else {
         header("HTTP/1.0 400 Bad Request", true, 400);
         echo $FIELD_REQUIRED;
@@ -1287,10 +1261,9 @@ case "change_password":
         $confirm_password = $_POST["confirm_password"];
         $user = $_SESSION["USER"];
 
-        $user_array = sqlite(
+        $user_array = $database_type(
             "QUERY_FETCH_ASSOC",
-            "SELECT * FROM USERS WHERE USER = '$user';"
-        );
+            "SELECT * FROM USERS WHERE USER = '$user';"); 
 
         $UUID = $user_array[0]["UUID"];
         $IV = $user_array[0]["IV"];
@@ -1312,10 +1285,9 @@ case "change_password":
         $IV = $new_enc["iv"];
         $CRYPTED = $new_enc["crypted"];
 
-        $update = sqlite(
+        $update = $database_type(
             "UPDATE",
-            "UPDATE USERS SET UUID = '$UUID', IV = '$IV', CRYPTED = '$CRYPTED' WHERE USER = '$user';"
-        );
+            "UPDATE USERS SET UUID = '$UUID', IV = '$IV', CRYPTED = '$CRYPTED' WHERE USER = '$user';"); 
 
         if ($update !== 1) {
             throw new Exception($UPDATE_FAIL);
@@ -1401,11 +1373,17 @@ case "calendar_api":
     }
         
     if (in_array($key, $api_array)) {
-        
-        $select_calendar = sqlite(
+    
+
+    if ($database_type == 'SQLite') {
+        $select_calendar = $database_type(
             "QUERY_FETCH_ASSOC",
-            "SELECT DAY, ROOM_TYPE, MAX_LOTATION, PRICE, CASE WHEN AVAILABILITY > 0 AND STATUS = 'open' THEN 'true' else 'false' END AS AVAILABLE FROM 'CALENDAR' WHERE DAY BETWEEN '$from' AND '$to' AND MAX_LOTATION >= '$lotation' AND AVAILABLE IN ($available) AND ROOM_TYPE IN ($type);"
-        );
+            "SELECT DAY, ROOM_TYPE, MAX_LOTATION, PRICE, CASE WHEN AVAILABILITY > 0 AND STATUS = 'open' THEN 'true' else 'false' END AS AVAILABLE FROM 'CALENDAR' WHERE DAY BETWEEN '$from' AND '$to' AND MAX_LOTATION >= '$lotation' AND AVAILABLE IN ($available) AND ROOM_TYPE IN ($type);");
+    } else {
+        $select_calendar = $database_type(
+            "QUERY_FETCH_ASSOC",
+            "SELECT DAY, ROOM_TYPE, MAX_LOTATION, PRICE, CASE WHEN (AVAILABILITY > 0 AND STATUS = 'open') THEN 'true' else 'false' END AS AVAILABLE FROM CALENDAR WHERE DAY BETWEEN '$check_in' AND '$check_out_less' AND MAX_LOTATION >= '$lotation' HAVING AVAILABLE = '$available' AND ROOM_TYPE = '$room_type';");
+    }
    
         if ($content == 'xml') {
             header("Content-Type: application/xml; charset=utf-8");

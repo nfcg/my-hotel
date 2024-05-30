@@ -1,4 +1,6 @@
 <?php
+// opcache_invalidate(__FILE__, true); opcache_reset();
+
 require "./include/conf.php";
 require "./include/functions.php";
 
@@ -23,10 +25,10 @@ if (isset($_SESSION["LAST_ACTIVITY"])) {
 
 if (isset($_SESSION["ID"]) && $_SESSION["ID"] != "") {
     $ID = $_SESSION["ID"];
-    $session = sqlite(
+    $session = $database_type(
         "QUERY_FETCH_ASSOC",
         "SELECT USER, USER_NAME, USER_TYPE FROM USERS WHERE ID='$ID';"
-    );
+    ); 
 
     $_SESSION["SITE"] = true;
     $_SESSION["USER"] = $session[0]["USER"];
