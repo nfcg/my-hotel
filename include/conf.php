@@ -15,11 +15,11 @@ $languages            = ['en','pt_PT'];
 
 $database_type      = 'SQLite'; // SQLite or MariaDB
 
-$MariaDB_name       = 'my_hotel'; // MariaDB Database name
+$MariaDB_name       = 'MariaDB_My_Hotel'; // MariaDB Database name
 $MariaDB_host       = 'localhost'; // MariaDB Host
 $MariaDB_user       = 'DB_user'; // MariaDB User
 $MariaDB_password   = 'DB_password'; // MariaDB Password
 
-$SQLite_location    = '/home/n/html/include/db/SQLite_my_hotel.sqlite'; // I strongly recommend setting the database location outside the (www/public_html) folder.
+$SQLite_location    = '/var/www/include/db/SQLite_my_hotel.sqlite'; // I strongly recommend setting the database location outside the (www/public_html) folder.
 
 ?>
