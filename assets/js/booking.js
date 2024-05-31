@@ -43,7 +43,7 @@ new tempusDominus.TempusDominus(document.getElementById('check_in'), {
     },
   },
   localization: {
-    format: 'dd-MM-yyyy',
+    format: 'yyyy-MM-dd',
     locale: lang,
     maxWeekdayLength: '3'
   },
@@ -77,7 +77,7 @@ new tempusDominus.TempusDominus(document.getElementById('check_out'), {
     },
   },
   localization: {
-    format: 'dd-MM-yyyy',
+    format: 'yyyy-MM-dd',
     locale: lang,
     maxWeekdayLength: '3'
   },

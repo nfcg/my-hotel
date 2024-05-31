@@ -7,6 +7,9 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
+CREATE DATABASE `MariaDB_My_Hotel` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `MariaDB_My_Hotel`;
+
 CREATE TABLE `BOOKINGS` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `FIRST_NAME` varchar(255) NOT NULL,
@@ -34,7 +37,7 @@ CREATE TABLE `BOOKINGS` (
   `AV_PRICE` decimal(15,2) NOT NULL,
   `TOTAL_PRICE` decimal(15,2) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `BOOKINGS` (`ID`, `FIRST_NAME`, `LAST_NAME`, `PHONE`, `EMAIL`, `CHECK_IN`, `CHECK_OUT`, `CC_NAME`, `CC_NUMBER`, `CC_EXPIRE`, `CC_CVC`, `IV_NUMBER`, `IV_EXPIRE`, `IV_CVC`, `ROOM_TYPE`, `DOUBLE_BED`, `YEAR`, `COMMENTS`, `STATUS`, `DATE`, `IP`, `CANCEL_POLICY`, `N_DAYS`, `AV_PRICE`, `TOTAL_PRICE`) VALUES
 (1,	'João',	'Carmo',	'910000111',	'NunoCarmo@n.local',	'2024-05-01',	'2024-05-02',	'Nuno Carmo',	'XkSRSdyRufK8DzbYX9imgQ==::1d86530f427f0eafcf0d71403f445c22',	'NzkZTLWw+A==::cb412811713c3d28f01796b4a7799780',	'Ev6w::4c04b6e52fb26e65e6e2701adfe3116d',	'HYZTD0J/Dq/PDXFAP0RcIg==',	'y0EoEXE8PSjwF5a0p3mXgA==',	'TAS25S+ybmXm4nAa3+MRbQ==',	'double',	'true',	'2024',	'Estimated arrival at 20:00',	'confirmed',	'2024-04-29 09:37:12',	'127.0.0.1',	'on',	1,	100.00,	100.00),
@@ -68,7 +71,7 @@ CREATE TABLE `CALENDAR` (
   `STATUS` varchar(50) NOT NULL,
   `MAX_LOTATION` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1099 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `CALENDAR` (`ID`, `DAY`, `ROOM_TYPE`, `AVAILABILITY`, `PRICE`, `STATUS`, `MAX_LOTATION`) VALUES
 (1,	'2024-01-01',	'double',	5,	100.00,	'open',	2),
@@ -1179,7 +1182,7 @@ CREATE TABLE `IMAGES` (
   `LANGUAGE` text NOT NULL,
   `GAL_NAME` text NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `IMAGES` (`ID`, `IMG_ALT`, `DESCRIPTION`, `IMG_SRC`, `TYPE`, `LANGUAGE`, `GAL_NAME`) VALUES
 (1,	'Hotel Image 1',	'Hotel Image 1 Description',	'assets/img/hotel_1.jpg',	'gallery_hotel',	'en',	'Hotel Images'),
@@ -1236,7 +1239,7 @@ CREATE TABLE `LANGUAGE_en` (
   `NAME` text NOT NULL,
   `TRANSLATION` text NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=273 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `LANGUAGE_en` (`ID`, `NAME`, `TRANSLATION`) VALUES
 (1,	'COPYRIGHT',	'Copyright'),
@@ -1517,7 +1520,7 @@ CREATE TABLE `LANGUAGE_pt_PT` (
   `NAME` text NOT NULL,
   `TRANSLATION` text NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=273 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `LANGUAGE_pt_PT` (`ID`, `NAME`, `TRANSLATION`) VALUES
 (1,	'COPYRIGHT',	'Copyright'),
@@ -1804,7 +1807,7 @@ CREATE TABLE `ROOMS` (
   `IMG_ALT` text NOT NULL,
   `TYPE` varchar(50) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `ROOMS` (`ID`, `LANGUAGE`, `NAME`, `DESCRIPTION`, `FACILITIES`, `MAX_LOTATION`, `IMG_SRC`, `IMG_ALT`, `TYPE`) VALUES
 (1,	'en',	'Single Room',	'These rooms offer all the comfort and privacy you need.\n Comfortable beds, spacious room recently renovated. Includes bathroom with free toiletries, flat screen TV, radio, mini fridge, telephone, safe, free Wi-Fi, air conditioning and tea and coffee making facilities.',	'<li class=\"list-group-item\">Desk</li>\n<li class=\"list-group-item\">Wardrobe</li>\n<li class=\"list-group-item\">Pay-Per-View Channels</li>\n<li class=\"list-group-item\">Sofa</li>',	1,	'assets/img/single.jpeg',	'Single Room',	'single'),
@@ -1822,7 +1825,7 @@ CREATE TABLE `SERVICES` (
   `IMG_SRC` text NOT NULL,
   `IMG_ALT` text NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `SERVICES` (`ID`, `LANGUAGE`, `NAME`, `DESCRIPTION`, `IMG_SRC`, `IMG_ALT`) VALUES
 (1,	'en',	'Restaurant',	'Overlooking the swimming pool, the hotel restaurant offers a wide variety of hot and cold dishes in a varied buffet.\n\nOpening hours:\nBreakfast: 07:30am - 10:30am\nLunch: 12:30am - 2:30pm / Dinner: 7:30pm – 10:00pm',	'assets/img/restaurant.jpeg',	'Restaurant'),
@@ -1844,9 +1847,9 @@ CREATE TABLE `USERS` (
   `IV` varchar(255) NOT NULL,
   `CRYPTED` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `USERS` (`ID`, `USER`, `USER_NAME`, `USER_EMAIL`, `USER_TYPE`, `USER_REG_IP`, `USER_REG_DATE`, `UUID`, `IV`, `CRYPTED`) VALUES
 (1,	'admin',	'Nuno Carmo',	'NunoCarmo@n.local',	'admin',	'127.0.0.1',	'2024-02-12 00:00:00',	'b4812400-c226-4478-91bf-f17e6cc66811',	'n+512Pr4Qtvz7tMgMgYe4Q==',	'jimERVg=::9fee75d8faf842dbf3eed32032061ee1');
 
--- 2024-05-30 06:47:59
+-- 2024-05-30 07:04:45

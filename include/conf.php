@@ -20,6 +20,6 @@ $MariaDB_host       = 'localhost'; // MariaDB Host
 $MariaDB_user       = 'DB_user'; // MariaDB User
 $MariaDB_password   = 'DB_password'; // MariaDB Password
 
-$SQLite_location    = '/var/www/include/db/SQLite_my_hotel.sqlite'; // I strongly recommend setting the database location outside the (www/public_html) folder.
+$SQLite_location    = realpath($_SERVER["DOCUMENT_ROOT"]) . '/www/include/db/SQLite_My_Hotel.sqlite'; // I strongly recommend setting the database location outside the (www/public_html) folder.
 
 ?>

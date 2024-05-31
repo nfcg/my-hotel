@@ -1,4 +1,5 @@
 <?php
+// opcache_invalidate(__FILE__, true); opcache_reset();
 session_start();
 require "conf.php";
 require "autoload.php";
@@ -814,7 +815,7 @@ function arrayToXML($array, SimpleXMLElement $xml, $child_name)
     return $xml->asXML();
 }
 
-function validateDate($date, $format = 'd-m-Y')
+function validateDate($date, $format = 'Y-m-d')
 {
     $d = DateTime::createFromFormat($format, $date);
     return $d && $d->format($format) == $date;
