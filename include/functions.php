@@ -419,6 +419,7 @@ $smarty->assign("html_lang", $html_lang);
 $smarty->assign("domain", $domain);
 $smarty->assign("http", $http);
 $smarty->assign("seo_links", $seo_links);
+$smarty->assign("theme", $theme);
 
 if ($seo_links == true) {
     $smarty->assign("link_booking", "Booking");

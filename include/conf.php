@@ -13,6 +13,8 @@ $api_array            = ['4f3ecd4898224267a50c'];
 $default_language     = "en";
 $languages            = ['en','pt_PT'];
 
+$theme                = 'default'; // https://bootswatch.com/
+
 $database_type      = 'SQLite'; // SQLite or MariaDB
 
 $MariaDB_name       = 'MariaDB_My_Hotel'; // MariaDB Database name

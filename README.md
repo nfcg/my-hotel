@@ -6,7 +6,7 @@ My Hotel
 Hotel Website and Booking Management System.
 </h3>
 
-Multi-language English and Portuguese. Written in PHP and using SQLite database, it is best suited to small and medium-sized hotels or hostels.
+Multi-themes and Language, currently English and Portuguese. Written in PHP and using SQLite database, it is best suited to small and medium-sized hotels or hostels.
  
  
  
