@@ -2,7 +2,7 @@
 // opcache_invalidate(__FILE__, true); opcache_reset();
 session_start();
 require "conf.php";
-require "autoload.php";
+require "vendor/autoload.php";
 
 use Smarty\Smarty;
 
