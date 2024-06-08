@@ -74,4 +74,23 @@ $("#language a").click(function () {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const htmlElement = document.documentElement;
+  const switchElement = document.getElementById('darkModeSwitch');
+
+  const currentTheme = localStorage.getItem('bsTheme') || '{/literal}{$BS_THEME_MODE}{literal}';
+  htmlElement.setAttribute('data-bs-theme', currentTheme);
+  switchElement.checked = currentTheme === '{/literal}{$BS_THEME_MODE}{literal}';
+
+  switchElement.addEventListener('change', function () {
+    if (this.checked) {
+      htmlElement.setAttribute('data-bs-theme', 'dark');
+      localStorage.setItem('bsTheme', 'dark');
+    } else {
+      htmlElement.setAttribute('data-bs-theme', 'light');
+      localStorage.setItem('bsTheme', 'light');
+    }
+  });
+});
 {/literal}</script>

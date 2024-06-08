@@ -14,6 +14,7 @@ $default_language     = "en";
 $languages            = ['en','pt_PT'];
 
 $theme                = 'default'; // https://bootswatch.com/
+$bs_theme_mode        = 'light'; // light or dark
 
 $database_type      = 'SQLite'; // SQLite or MariaDB
 

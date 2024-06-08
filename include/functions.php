@@ -302,6 +302,7 @@ $smarty->assign("CUR_YEAR", date("Y"));
 $smarty->assign("CC_YEARS", $cc_years);
 $smarty->assign("CC_VAL", $cc_val);
 $smarty->assign("SITE_START_YEAR", $site_start_year);
+$smarty->assign("BS_THEME_MODE", $bs_theme_mode);
 
 $gallery_list = $database_type(
     "QUERY_FETCH_ASSOC",
