@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   const currentTheme = localStorage.getItem('bsTheme') || '{/literal}{$BS_THEME_MODE}{literal}';
   htmlElement.setAttribute('data-bs-theme', currentTheme);
-  switchElement.checked = currentTheme === '{/literal}{$BS_THEME_MODE}{literal}';
+  switchElement.checked = currentTheme === 'dark';
 
   switchElement.addEventListener('change', function () {
     if (this.checked) {
