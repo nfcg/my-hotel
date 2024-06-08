@@ -38,20 +38,20 @@
       
      {if {$page} == 'booking' || {$page} == 'admin_bookings' || {$page} == 'admin_calendar'}
      <!-- tempus-dominus JS -->
-      <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.7/dist/js/tempus-dominus.min.js"></script>  
+      <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.9/dist/js/tempus-dominus.min.js"></script>  
 
      <!-- tempus-dominus CSS -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.7/dist/css/tempus-dominus.min.css">{/if}
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.9/dist/css/tempus-dominus.min.css">{/if}
 
      {if {$page} == 'admin_bookings' || {$page} == 'admin_calendar' || {$page} == 'admin_language'}
      <!-- bootstrap-table CSS -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.3/dist/bootstrap-table.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/bootstrap-table.min.css">
 
      <!-- bootstrap-table JS -->           
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.0/dist/bootstrap-table.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/bootstrap-table.min.js"></script>
       
      <!-- bootstrap-table-editable JS -->      
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.0/dist/extensions/editable/bootstrap-table-editable.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/extensions/editable/bootstrap-table-editable.js"></script>
 
      <!-- x-editable CSS -->
       <link rel="stylesheet" href="assets/bootstrap5-editable/css/bootstrap-editable.css" media="all">
@@ -60,20 +60,19 @@
       <script src="assets/bootstrap5-editable/js/bootstrap-editable.js"></script>
 
      <!-- bootstrap-table-filter-control JS --> 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.0/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
       
      <!-- tableExport JS --> 
-     <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.29.0/tableExport.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.30.0/tableExport.min.js"></script>
      
      <!-- bootstrap-table-export JS --> 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.0/dist/extensions/export/bootstrap-table-export.min.js"></script>{/if}
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.22.6/dist/extensions/export/bootstrap-table-export.min.js"></script>{/if}
     
      {if {$page} == 'admin_bookings'}<!-- page-admin_bookings CSS -->
       <link rel="stylesheet" href="assets/css/admin_bookings.css" media="all">{/if}   
      
      {if {$page} == 'admin_language'}<!-- page-admin_bookings CSS -->
       <link rel="stylesheet" href="assets/css/admin_language.css" media="all">{/if}   
-     
      
      {if {$page} == 'cc'}<!-- page-cc CSS -->
       <link rel="stylesheet" href="assets/css/cc.css" media="all">{/if}
