@@ -87,9 +87,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if (this.checked) {
       htmlElement.setAttribute('data-bs-theme', 'dark');
       localStorage.setItem('bsTheme', 'dark');
+      $('#ModeSwitch').removeClass('bi-brightness-high-fill').addClass('bi-moon-stars-fill');
     } else {
       htmlElement.setAttribute('data-bs-theme', 'light');
       localStorage.setItem('bsTheme', 'light');
+      $('#ModeSwitch').removeClass('bi-moon-stars-fill').addClass('bi-brightness-high-fill');
     }
   });
 });

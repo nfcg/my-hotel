@@ -54,7 +54,7 @@
           <ul class="navbar-nav ms-2 mb-2 fw-bold">
             <div class="form-check form-switch fs-5">
               <input class="form-check-input" type="checkbox" role="switch" id="darkModeSwitch">
-              <label class="form-check-label text-white" for="darkModeSwitch">Light/Dark</label>
+              <label id="ModeSwitch" class="form-check-label text-white bi bi-brightness-high-fill" for="darkModeSwitch"></label>
             </div>
           </ul>
     </div>

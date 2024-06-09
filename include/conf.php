@@ -15,6 +15,7 @@ $languages            = ['en','pt_PT'];
 
 $theme                = 'default'; // https://bootswatch.com/
 $bs_theme_mode        = 'light'; // light or dark
+$font                 = 'Merriweather'; // https://fonts.google.com - https://www.justinmind.com/blog/best-google-web-fonts-website/
 
 $database_type      = 'SQLite'; // SQLite or MariaDB
 

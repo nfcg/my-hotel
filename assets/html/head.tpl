@@ -82,6 +82,11 @@
         width: 135px;
       }      
     </style>{/if}
+    
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family={$FONT}&display=swap');
+      body { --bs-body-font-family: '{$FONT}'; }
+    </style>
 
     {if {$page} == 'admin_calendar' || {$page} == 'admin_bookings' || {$page} == 'admin_language'}<style>
       .pagination-info { 
