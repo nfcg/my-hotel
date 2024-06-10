@@ -6,9 +6,9 @@
     <h4 class="ms-3 mb-5 text-secondary fw-bold">{$PAGE_ROOMS_DESCRIPTION}</h4>
     
     {foreach $rooms as $value}
-     <div class="card mb-3 shadow p-1 bg-body rounded">
-      <div class="row g-0">
-        <div class="col-md-4">
+     <div class="card mb-2 shadow p-1 bg-body rounded">
+      <div class="row g-0 align-items-center">
+        <div class="px-2 col-md-4">
           <img src="{$value.IMG_SRC}" class="img-fluid rounded-start" alt="{$value.IMG_ALT}">
         </div>
         <div class="col-md-8">

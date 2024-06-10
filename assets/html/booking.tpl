@@ -29,10 +29,13 @@
       </div>
       <div class="row mx-2">
         <div class="input-group date input-group-lg mb-3" data-target-input="nearest">
-          <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">&#x1f6ec; Check-In</span>
-          <input type="text" class="datetimepicker-input check_in form-control bg-white border-top-0 border-primary border-left-0 border-right-0 d-flex justify-content-center mx-auto" placeholder="dd/mm/yyyy" data-target="#check_in" id="check_in" name="check_in" autocomplete="off" required>
-          
-          <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0 ms-2">&#x1f6eb; Check-Out</span>
+          <span class="text-decoration-underline input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">Check-In 
+            <img src="assets/img/arrival.png" class="mx-1 text-primary"/>
+          </span>
+          <input type="text" class="datetimepicker-input check_in form-control bg-white border-top-0 border-primary border-left-0 border-right-0 d-flex justify-content-center mx-auto" placeholder="dd/mm/yyyy" data-target="#check_in" id="check_in" name="check_in" autocomplete="off" required>          
+          <span class="text-decoration-underline input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0 ms-2">Check-Out 
+            <img src="assets/img/departure.png" class="mx-1 text-primary"/>
+          </span>
           <input type="text" class="datetimepicker-input check_out form-control bg-white border-top-0 border-primary border-left-0 border-right-0 d-flex justify-content-center mx-auto" placeholder="dd/mm/yyyy" data-target="#check_out" id="check_out" name="check_out" autocomplete="off" required>
         </div>
       </div>
@@ -93,7 +96,7 @@
         </div>
         <div class="input-group date input-group-lg mb-3 shadow shadow-sm">
           <span class="input-group-text fw-bold text-primary bg-white border-primary bg-white border-top-0 border-right-0">{$NUMBER}</span>
-          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0 d-flex justify-content-center mx-auto" id="cc_number" name="cc_number" autocomplete="off" required>
+          <input type="text" class="form-control bg-white border-top-0 border-primary border-left-0 border-right-0 d-flex justify-content-center mx-auto" id="cc_number" name="cc_number" autocomplete="off" value="5500005555555559" required>
         </div>
         <div class="row">
           <div class="col input-group date input-group-lg mb-3">
